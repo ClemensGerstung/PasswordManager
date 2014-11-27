@@ -1,4 +1,4 @@
-package com.password.manager;
+package com.password.manager.classes;
 
 import java.util.Random;
 
@@ -9,7 +9,7 @@ public class RandomPasswordGenerator {
     private static final String ALPHA_CAPS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String ALPHA = "abcdefghijklmnopqrstuvwxyz";
     private static final String NUM = "0123456789";
-    private static final String SPL_CHARS = "!*_+-/";
+    private static final String SPL_CHARS = "!*_+-/&,.;:";
 
     public static char[] generatePswd(int minLen, int maxLen, int noOfCAPSAlpha, int noOfDigits, int noOfSplChars) {
         if (minLen > maxLen)

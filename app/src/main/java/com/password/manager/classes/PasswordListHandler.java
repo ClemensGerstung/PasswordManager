@@ -1,4 +1,4 @@
-package com.password.manager;
+package com.password.manager.classes;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;

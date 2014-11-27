@@ -1,4 +1,4 @@
-package com.password.manager;
+package com.password.manager.classes;
 
 import android.util.Base64;
 
