@@ -15,8 +15,11 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+
+/// One of the old classes
+/// Just for using
 @Root(name="PasswordFile")
-class Password {
+public class Password {
     @Element(name="header")
     private String header;
     @Element(name="username")
@@ -24,7 +27,9 @@ class Password {
     @Element(name="password")
     private String password;
 
-    public Password(@Element(name="header")String header, @Element(name="username")String username, @Element(name="password")String password) {
+    public Password(@Element(name="header")String header,
+                    @Element(name="username")String username,
+                    @Element(name="password")String password) {
         this.header = header;
         this.username = username;
         this.password = password;
@@ -32,21 +37,11 @@ class Password {
 
     public String serialize() throws Exception {
         String s = "";
-
         Serializer serializer = new Persister();
         StringWriter writer = new StringWriter();
         writer.append(s);
         serializer.write(this, writer);
-
         return writer.toString();
-    }
-
-    public static Password deserialize(String data) throws Exception {
-        Serializer serializer = new Persister();
-
-
-
-        return null;
     }
 
     public String getHeader() {

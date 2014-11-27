@@ -11,6 +11,9 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Created by Clemens on 15.09.2014.
  */
+
+/// One of the old classes!
+/// But still worth using it!
 public class AESHelper {
     public static String decrypt(String data) throws Exception {
         byte[] decodedFrom64 = Base64.decode(data, Base64.DEFAULT);
