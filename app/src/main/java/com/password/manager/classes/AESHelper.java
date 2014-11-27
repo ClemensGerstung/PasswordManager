@@ -15,10 +15,10 @@ import javax.crypto.spec.SecretKeySpec;
 /// One of the old classes!
 /// But still worth using it!
 public class AESHelper {
-    public static String decrypt(String data) throws Exception {
+    public static String decrypt(String data, String password) throws Exception {
         byte[] decodedFrom64 = Base64.decode(data, Base64.DEFAULT);
 
-        byte[] key = (User.password).getBytes("UTF-8");
+        byte[] key = (password).getBytes("UTF-8");
         MessageDigest sha = MessageDigest.getInstance("MD5");
         key = sha.digest(key);
         key = Arrays.copyOf(key, 32);
