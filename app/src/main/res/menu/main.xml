@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.password.manager.MainActivity" >
     <item android:id="@+id/activity_main_menu_change_password"
-        android:title="@string/activity_main_change_password"
+        android:title="@string/main_layout_menu_item_change_password_string"
         android:orderInCategory="100"
         android:icon="@android:drawable/ic_popup_sync"
         app:showAsAction="never" />

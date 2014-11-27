@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<string name="app_name">PasswordManager</string>
-<string name="activity_main_title">Password-Manager</string>
-<string name="activity_main_change_password">Change Password</string>
+    <string name="app_name">PasswordManager</string>
+    <string name="activity_main_title">Password-Manager</string>
+    <string name="main_layout_menu_item_change_password_string">Change Password</string>
+
+    <string name="login_layout_text_view_name_string">Name</string>
 
 </resources>

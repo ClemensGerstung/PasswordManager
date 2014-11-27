@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.password.manager.LoginFragment">
+
+    <RelativeLayout
+        android:id="@+id/login_layout_parent_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/login_layout_text_view_name_string"
+            android:id="@+id/login_name_text_view"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="58dp" />
+
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:id="@+id/login_name_expandable_list_view"
+            android:layout_alignTop="@+id/login_name_text_view"
+            android:layout_toRightOf="@+id/login_name_text_view"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="57dp" />
+
+    </RelativeLayout>
+</FrameLayout>
