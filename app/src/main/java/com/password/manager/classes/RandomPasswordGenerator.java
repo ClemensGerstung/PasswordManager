@@ -42,7 +42,7 @@ public class RandomPasswordGenerator {
 
     private static int getNextIndex(Random rnd, int len, char[] pswd) {
         int index = rnd.nextInt(len);
-        while (pswd[index = rnd.nextInt(len)] != 0);
+        while (pswd[index = rnd.nextInt(len)] != 0) ;
         return index;
     }
 }

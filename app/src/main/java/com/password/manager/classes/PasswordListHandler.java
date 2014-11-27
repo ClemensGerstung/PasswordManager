@@ -10,13 +10,12 @@ import java.util.List;
  */
 
 /// a new class!
-@Root(name="CompletePasswordFile")
+@Root(name = "CompletePasswordFile")
 public class PasswordListHandler {
-    @ElementList(name="objects")
+    @ElementList(name = "objects")
     public List<Password> objects;
 
-    public PasswordListHandler(@ElementList(name="objects")List<Password> objects)
-    {
+    public PasswordListHandler(@ElementList(name = "objects") List<Password> objects) {
         this.objects = objects;
     }
 }

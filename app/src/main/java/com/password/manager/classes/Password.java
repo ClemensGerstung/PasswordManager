@@ -1,35 +1,28 @@
 package com.password.manager.classes;
 
 
-import android.util.Xml;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.ArrayList;
 
 
 /// One of the old classes
 /// Just for using
-@Root(name="PasswordFile")
+@Root(name = "PasswordFile")
 public class Password {
-    @Element(name="header")
+    @Element(name = "header")
     private String header;
-    @Element(name="username")
+    @Element(name = "username")
     private String username;
-    @Element(name="password")
+    @Element(name = "password")
     private String password;
 
-    public Password(@Element(name="header")String header,
-                    @Element(name="username")String username,
-                    @Element(name="password")String password) {
+    public Password(@Element(name = "header") String header,
+                    @Element(name = "username") String username,
+                    @Element(name = "password") String password) {
         this.header = header;
         this.username = username;
         this.password = password;

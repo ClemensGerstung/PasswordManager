@@ -8,18 +8,18 @@ import org.simpleframework.xml.Root;
  */
 
 /// one of the old classes
-@Root(name="user")
+@Root(name = "user")
 public class User {
-    @Element(name="name")
+    @Element(name = "name")
     public String username;
-    @Element(name="password")
+    @Element(name = "password")
     public String password;
-    @Element(name="path")
+    @Element(name = "path")
     public String path;
 
-    public User(@Element(name="name")String username,
-                @Element(name="password")String password,
-                @Element(name="path")String path) {
+    public User(@Element(name = "name") String username,
+                @Element(name = "password") String password,
+                @Element(name = "path") String path) {
         this.username = username;
         this.password = password;
         this.path = path;

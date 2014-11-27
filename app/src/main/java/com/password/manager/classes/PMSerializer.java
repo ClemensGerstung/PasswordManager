@@ -1,10 +1,9 @@
 package com.password.manager.classes;
 
+import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
-import org.simpleframework.xml.Serializer;
 
-import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -12,8 +11,7 @@ import java.io.StringWriter;
  * Created by Clemens on 27.11.2014.
  */
 public class PMSerializer {
-    public static <T> String serialize(T clazz, User user) throws Exception
-    {
+    public static <T> String serialize(T clazz, User user) throws Exception {
         Serializer serializer = new Persister(new AnnotationStrategy());
 
         StringWriter writer = new StringWriter();
