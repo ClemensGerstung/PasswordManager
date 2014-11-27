@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PasswordManager</string>
+
+    <string name="add_new_password_fragment_header_text_view">Header:</string>
+    <string name="add_new_password_fragment_username_text_view">Username:</string>
+    <string name="add_new_password_fragment_password_text_view">Password:</string>
+
+    <string name="create_user_fragment_create_user_text_view">Create User</string>
+    <string name="create_user_fragment_name_text_view">Name:</string>
+    <string name="create_user_fragment_password_text_view">Password:</string>
+    <string name="create_user_fragment_return_button">Return</string>
+    <string name="create_user_fragment_create_user_button">Create User</string>
+
+    <string name="fragment_login_create_user_button">Create New User</string>
+
+    <string name="password_list_fragment_insert_new_password_button">Insert New Password</string>
+
+    <string name="password_edit_menu_show">Show</string>
+    <string name="password_edit_menu_edit">Edit</string>
+    <string name="password_edit_menu_delete">Delete</string>
+</resources>
