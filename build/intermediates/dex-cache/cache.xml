@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\classes-80d2a23e94a98786a248a2a8dd5c289bf069a7cc.jar"
+        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.2\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54"/>
+    <item
+        dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\simple-xml-2.7.1-23192835f73098aae101cba0b82bac42655f8b0a.jar"
+        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\libs\simple-xml-2.7.1.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="083623424bcfa03bd598e709765bad0816c2375d"/>
+    <item
+        dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\classes-a26903789adce7ef2a9f9560a5c477aee51507a6.jar"
+        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3"/>
+    <item
+        dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-d3d4aaedc063196c0026fef4d1cd1f681dd21d05.jar"
+        jar="D:\Libraries\Android\adt-bundle-windows-x86_64-20131030\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.2\support-annotations-21.0.2.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6"/>
+    <item
+        dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-706691f497942e1800e6a8c55251b8e45ea13612.jar"
+        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\libs\internal_impl-21.0.2.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f"/>
+
+</pre-dex-items>
