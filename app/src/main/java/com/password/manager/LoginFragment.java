@@ -8,13 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
+import android.widget.CheckBox;
+import android.widget.Spinner;
 
 public class LoginFragment extends Fragment {
 
-    private ExpandableListView expandableListView;
-
+    private CheckBox checkBox;
 
     public LoginFragment() {
         
@@ -25,12 +24,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_layout, container, false);
-        expandableListView = (ExpandableListView)view.findViewById(R.id.login_name_expandable_list_view);
-
-        String[] strings = {"Hallo", "Eins", "Zwei", "Drei"};
-
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.login_name_dropdown_menu_layout, strings);
-        expandableListView.setAdapter(listAdapter);
+        checkBox = (CheckBox)view.findViewById(R.id.login_check_box_remember_user);
 
         return view;
     }
