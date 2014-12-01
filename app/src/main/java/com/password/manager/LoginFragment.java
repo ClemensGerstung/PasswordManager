@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.password.manager.classes.AESHelper;
 import com.password.manager.classes.FileAndDirectoryHandler;
 import com.password.manager.classes.PMSerializer;
 import com.password.manager.classes.User;
-import com.password.manager.clickhandler.LoginClickHandler;
 
 import java.io.File;
 
@@ -47,9 +47,22 @@ public class LoginFragment extends Fragment {
         passwordCharSequence = password.getText();
 
         try {
-            String userFile = FileAndDirectoryHandler.readFile(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence.toString() + ".xml");
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        String user_file = FileAndDirectoryHandler.readFile(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml");
+                        User user = PMSerializer.deserialize(user_file, User.class);
 
-            login.setOnClickListener(new LoginClickHandler(userFile, passwordCharSequence.toString()));
+                        String en_pas = AESHelper.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString());
+                        if(!user.password.equals(en_pas)){
+                            throw new Exception("Password is wrong!");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
         } catch (Exception e) { e.printStackTrace(); }
 

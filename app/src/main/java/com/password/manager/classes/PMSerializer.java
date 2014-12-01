@@ -20,7 +20,7 @@ public class PMSerializer {
         return writer.toString();
     }
 
-    public static <T> T deserialize(String data, Class<? extends T> aClass) throws Exception {
+    public static <T> T deserialize(String data, Class<T> aClass) throws Exception {
         Serializer serializer = new Persister(new AnnotationStrategy());
         StringReader stringReader = new StringReader(data);
 
