@@ -61,7 +61,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/login_name_input"
             android:layout_alignTop="@+id/login_name_text_view"
             android:layout_alignLeft="@+id/login_password_input"
             android:layout_alignStart="@+id/login_password_input"
@@ -77,6 +77,16 @@
             android:layout_below="@+id/login_check_box_remember_user"
             android:layout_alignRight="@+id/login_check_box_remember_user"
             android:layout_alignEnd="@+id/login_check_box_remember_user" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_layout_button_create_user"
+            android:id="@+id/login_button_create_user"
+            android:layout_marginRight="15dp"
+            android:layout_alignTop="@+id/login_button_login"
+            android:layout_toLeftOf="@+id/login_button_login"
+            android:layout_toStartOf="@+id/login_button_login" />
 
 
     </RelativeLayout>
