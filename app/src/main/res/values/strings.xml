@@ -13,5 +13,8 @@
 
     <string name="password_list_menu_logout">Logout</string>
 
+    <string name="error_user_doesnt_exist">User doesn\'t exist!</string>;
+    <string name="error_wrong_password">Wrong password!</string>
+    <string name="error">Error: </string>
 
 </resources>

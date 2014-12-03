@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.password.manager.classes.AESHelper;
 import com.password.manager.classes.FileAndDirectoryHandler;
+import com.password.manager.classes.PasswordListHandler;
 import com.password.manager.classes.User;
 
 import java.io.File;
@@ -51,7 +52,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     if(!new File(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml").exists()){
-                        throw new Exception("User doesn't exist!");
+                        throw new Exception(getActivity().getResources().getString(R.string.error_user_doesnt_exist));
                     }
 
 
@@ -60,18 +61,20 @@ public class LoginFragment extends Fragment {
 
                     String en_pas = AESHelper.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString()).replace("\n", "");
                     if (!user.getPassword().equals(en_pas)) {
-                        throw new Exception("Password is wrong!");
+                        throw new Exception(getActivity().getResources().getString(R.string.error_wrong_password));
                     } else {
                         user.setPassword(passwordCharSequence.toString());
 
                         String key_file = FileAndDirectoryHandler.readFile(FileAndDirectoryHandler.PathToKeys + File.separator + nameCharSequence + ".xml");
 
+                        String de_key_file = AESHelper.decrypt(key_file, user.getPassword());
 
+                        PasswordListHandler passwordListHandler = PasswordListHandler.createPasswordListHandlerFromString(de_key_file);
 
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment()).commit();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.error) + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
