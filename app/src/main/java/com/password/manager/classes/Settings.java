@@ -15,6 +15,22 @@ public class Settings {
     @Element(name = "rememberedUserName")
     private String rememberedUserName;
 
+    public boolean isSaveLogin() {
+        return saveLogin;
+    }
+
+    public void setSaveLogin(boolean saveLogin) {
+        this.saveLogin = saveLogin;
+    }
+
+    public String getRememberedUserName() {
+        return rememberedUserName;
+    }
+
+    public void setRememberedUserName(String rememberedUserName) {
+        this.rememberedUserName = rememberedUserName;
+    }
+
     private Settings(@Element(name = "rememberedUserName") String rememberedUserName,
                      @Element(name = "saveLogin") boolean saveLogin) {
         this.rememberedUserName = rememberedUserName;

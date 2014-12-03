@@ -17,6 +17,7 @@ import com.password.manager.classes.PasswordListHandler;
 import com.password.manager.classes.User;
 
 import java.io.File;
+import java.util.Timer;
 
 public class LoginFragment extends Fragment {
 
@@ -47,21 +48,31 @@ public class LoginFragment extends Fragment {
         nameCharSequence = name.getText();
         passwordCharSequence = password.getText();
 
+
+        /// TODO: prevent brut-force-attacks!
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    if(!new File(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml").exists()){
-                        throw new Exception(getActivity().getResources().getString(R.string.error_user_doesnt_exist));
+                    if (nameCharSequence.length() == 0 && passwordCharSequence.length() == 0)
+                        throw new Exception(getResourceString(R.string.error_no_user_input_and_password));
+                    if (nameCharSequence.length() == 0)
+                        throw new Exception(getResourceString(R.string.error_no_user_input));
+                    if (passwordCharSequence.length() == 0)
+                        throw new Exception(getResourceString(R.string.error_no_password));
+
+
+                    String path = FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml";
+                    if (!new File(path).exists()) {
+                        throw new Exception(getResourceString(R.string.error_user_doesnt_exist));
                     }
 
-
-                    String user_file = FileAndDirectoryHandler.readFile(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml");
+                    String user_file = FileAndDirectoryHandler.readFile(path);
                     User user = User.getInstance(user_file);
 
                     String en_pas = AESHelper.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString()).replace("\n", "");
                     if (!user.getPassword().equals(en_pas)) {
-                        throw new Exception(getActivity().getResources().getString(R.string.error_wrong_password));
+                        throw new Exception(getResourceString(R.string.error_wrong_password));
                     } else {
                         user.setPassword(passwordCharSequence.toString());
 
@@ -74,13 +85,17 @@ public class LoginFragment extends Fragment {
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment()).commit();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.error) + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
 
 
         return view;
+    }
+
+    public String getResourceString(int id) {
+        return getActivity().getResources().getString(id);
     }
 
 
