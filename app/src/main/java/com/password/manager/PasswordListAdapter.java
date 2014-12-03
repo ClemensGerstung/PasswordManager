@@ -17,8 +17,8 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
     private List<Password> objects;
     private boolean saveLogin;
 
-    public PasswordListAdapter(Context context, int resource, List<Password> objects, boolean saveLogin) {
-        super(context, resource, objects);
+    public PasswordListAdapter(Context context,  List<Password> objects, boolean saveLogin) {
+        super(context, 0, objects);
         this.objects = objects;
         this.saveLogin = saveLogin;
     }
@@ -37,7 +37,7 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
         
         TextView header = (TextView)v.findViewById(R.id.header_text_view);
         TextView username = (TextView)v.findViewById(R.id.user_name_text_view);
-        TextView password = !saveLogin ? null : (TextView)v.findViewById(R.id.password_text_view);
+        TextView password = !saveLogin ? (TextView)v.findViewById(R.id.password_text_view) : null;
 
         Password curr = objects.get(position);
 

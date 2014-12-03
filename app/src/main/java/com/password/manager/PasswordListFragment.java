@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.password.manager.classes.PasswordListHandler;
+
 
 public class PasswordListFragment extends Fragment {
 
@@ -42,8 +44,8 @@ public class PasswordListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.password_list_layout, container, false);
         passwordListView = (ListView) view.findViewById(R.id.password_list_list_view);
-
-
+        PasswordListAdapter passwordListAdapter = new PasswordListAdapter(getActivity(), PasswordListHandler.getInstance().objects, false);
+        passwordListView.setAdapter(passwordListAdapter);
 
         return view;
     }
