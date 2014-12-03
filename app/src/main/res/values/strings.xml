@@ -4,11 +4,14 @@
     <string name="app_name">PasswordManager</string>
     <string name="activity_main_title">Password-Manager</string>
     <string name="main_layout_menu_item_change_password_string">Change Password</string>
-
     <string name="login_layout_text_view_name_string">Name</string>
     <string name="login_layout_text_view_password_string">Password</string>
     <string name="login_layout_checkbox_string">Remember User</string>
     <string name="login_layout_button_login">Login</string>
     <string name="login_layout_button_create_user">Create User</string>
+    <string name="login_layout_checkbox_save_login">Save Login</string>
+
+    <string name="password_list_menu_logout">Logout</string>
+
 
 </resources>

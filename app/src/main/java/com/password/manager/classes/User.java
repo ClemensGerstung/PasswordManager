@@ -49,5 +49,14 @@ public class User {
         this.path = path;
     }
 
+    private static User user;
 
+    public static User getInstance(String user_file) throws Exception {
+        if(user == null && user_file != null)
+        {
+            user = PMSerializer.deserialize(user_file, User.class);
+        }
+
+        return user;
+    }
 }

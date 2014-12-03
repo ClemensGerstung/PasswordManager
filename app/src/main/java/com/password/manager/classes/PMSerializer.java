@@ -24,7 +24,9 @@ public class PMSerializer {
         Serializer serializer = new Persister(new AnnotationStrategy());
         StringReader stringReader = new StringReader(data);
 
-        return (T) serializer.read(aClass.getClass(), stringReader);
+        T t = serializer.read(aClass, stringReader);
+
+        return t;
     }
 
 }

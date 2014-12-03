@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.password.manager.classes.AESHelper;
 import com.password.manager.classes.FileAndDirectoryHandler;
-import com.password.manager.classes.PMSerializer;
 import com.password.manager.classes.User;
 
 import java.io.File;
@@ -46,25 +46,35 @@ public class LoginFragment extends Fragment {
         nameCharSequence = name.getText();
         passwordCharSequence = password.getText();
 
-        try {
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        String user_file = FileAndDirectoryHandler.readFile(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml");
-                        User user = PMSerializer.deserialize(user_file, User.class);
-
-                        String en_pas = AESHelper.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString());
-                        if(!user.password.equals(en_pas)){
-                            throw new Exception("Password is wrong!");
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if(!new File(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml").exists()){
+                        throw new Exception("User doesn't exist!");
                     }
-                }
-            });
 
-        } catch (Exception e) { e.printStackTrace(); }
+
+                    String user_file = FileAndDirectoryHandler.readFile(FileAndDirectoryHandler.PathToUsers + File.separator + nameCharSequence + ".xml");
+                    User user = User.getInstance(user_file);
+
+                    String en_pas = AESHelper.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString()).replace("\n", "");
+                    if (!user.getPassword().equals(en_pas)) {
+                        throw new Exception("Password is wrong!");
+                    } else {
+                        user.setPassword(passwordCharSequence.toString());
+
+                        String key_file = FileAndDirectoryHandler.readFile(FileAndDirectoryHandler.PathToKeys + File.separator + nameCharSequence + ".xml");
+
+
+
+                        getActivity().getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment()).commit();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
         return view;
