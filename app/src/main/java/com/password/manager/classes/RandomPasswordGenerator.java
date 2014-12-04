@@ -11,7 +11,7 @@ public class RandomPasswordGenerator {
                     "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                     "abcdefghijklmnopqrstuvwxyz",
                     "0123456789",
-                    "!*_+-/&,.;:"
+                    "!*_+-/;:"
             };
 
 

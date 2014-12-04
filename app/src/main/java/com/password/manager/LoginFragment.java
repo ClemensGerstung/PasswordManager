@@ -105,6 +105,8 @@ public class LoginFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    User.logout();
+                    PasswordListHandler.logout();
                 }
             }
         });

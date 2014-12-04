@@ -30,7 +30,7 @@ public class AddEditPasswordHelper {
             @Override
             public boolean onLongClick(View v) {
 
-                password_edit_text.setText(RandomPasswordGenerator.generatePassword(8, 15, 2, 2, 2), TextView.BufferType.NORMAL);
+                password_edit_text.setText(RandomPasswordGenerator.generatePassword(10, 15, 2, 4, 4), TextView.BufferType.NORMAL);
 
                 return true;
             }
@@ -44,29 +44,70 @@ public class AddEditPasswordHelper {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                }).
-                setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String program = program_edit_text.getText().toString();
                         String username = username_edit_text.getText().toString();
                         String password = password_edit_text.getText().toString();
 
-                        try {
-                            if(program.length() == 0) throw new Exception(getString(context, R.string.error_no_program));
-                            if(password.length() == 0) throw new Exception(getString(context, R.string.error_no_password));
+                        if (program.length() == 0) {
+                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_program), Toast.LENGTH_LONG).show();
+                        } else if (password.length() == 0) {
+                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_password), Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                passwordListHandler.addAndSave(new Password(program, username, password));
+                            } catch (Exception e) {
+                                Toast.makeText(context, getString(context, R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
 
-                            passwordListHandler.addAndSave(new Password(program, username, password));
-                        } catch (Exception e) {
-                            Toast.makeText(context, getString(context, R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
                         }
-
-                        dialog.dismiss();
                     }
                 })
                 .show();
 
     }
+
+    public static void showPassword(final Context context, Password password) {
+        final PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
+        View view = View.inflate(context, R.layout.show_passowrd_layout, null);
+
+        final TextView program_text_view = (TextView) view.findViewById(R.id.show_password_edit_text_program);
+        final TextView username_text_view = (TextView) view.findViewById(R.id.show_password_edit_text_username);
+        final TextView password_text_view = (TextView) view.findViewById(R.id.show_password_edit_text_password);
+
+        program_text_view.setText(password.getHeader(), TextView.BufferType.NORMAL);
+        username_text_view.setText(password.getUsername(), TextView.BufferType.NORMAL);
+        password_text_view.setText(password.getPassword(), TextView.BufferType.NORMAL);
+
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getString(R.string.add_edit_password_helper_add_title))
+                .setView(view)
+                .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                // TODO: extract to strings.xml
+                .setNeutralButton("Edit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
 
     private static String getString(Context context, int id) {
         return context.getResources().getString(id);

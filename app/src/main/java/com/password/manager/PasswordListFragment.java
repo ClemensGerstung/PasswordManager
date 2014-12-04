@@ -11,9 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.password.manager.classes.Password;
 import com.password.manager.classes.PasswordListHandler;
 import com.password.manager.classes.Settings;
 import com.password.manager.classes.User;
@@ -65,6 +67,13 @@ public class PasswordListFragment extends Fragment {
             Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
         passwordListView.setAdapter(passwordListAdapter);
+
+        passwordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AddEditPasswordHelper.showPassword(getActivity(), PasswordListHandler.getInstance().getObjects().get(position));
+            }
+        });
 
         return view;
     }
