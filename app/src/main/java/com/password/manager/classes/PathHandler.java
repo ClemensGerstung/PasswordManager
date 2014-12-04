@@ -12,11 +12,18 @@ import java.io.OutputStream;
 /**
  * Created by Clemens on 27.11.2014.
  */
-public class FileAndDirectoryHandler {
+public class PathHandler {
 
     public static String Path = Environment.getExternalStorageDirectory() + File.separator + "Android" + File.separator + "data" + File.separator + "com.password.manager";
     public static String PathToUsers = Path + File.separator + "USERS";
     public static String PathToKeys = Path + File.separator + "KEYS";
+    public static String PathToSettingsFile = Path + File.separator + "settings.xml";
+
+    public static boolean fileExists(String path)
+    {
+        return new File(path).exists();
+    }
+
 
     public static String readFile(String path) throws Exception {
         String file = "";

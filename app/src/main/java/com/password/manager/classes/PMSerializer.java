@@ -11,7 +11,7 @@ import java.io.StringWriter;
  * Created by Clemens on 27.11.2014.
  */
 public class PMSerializer {
-    public static <T> String serialize(T clazz, User user) throws Exception {
+    public static <T> String serialize(T clazz) throws Exception {
         Serializer serializer = new Persister(new AnnotationStrategy());
 
         StringWriter writer = new StringWriter();

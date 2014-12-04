@@ -31,19 +31,41 @@ public class Settings {
         this.rememberedUserName = rememberedUserName;
     }
 
-    private Settings(@Element(name = "rememberedUserName") String rememberedUserName,
-                     @Element(name = "saveLogin") boolean saveLogin) {
+    public Settings(@Element(name = "rememberedUserName") String rememberedUserName,
+                    @Element(name = "saveLogin") boolean saveLogin) {
         this.rememberedUserName = rememberedUserName;
         this.saveLogin = saveLogin;
     }
 
-    public static Settings getInstance() {
-        if (settings == null) {
+    public Settings() {
+        this.rememberedUserName = "";
+        this.saveLogin = false;
+    }
 
+    public static Settings getInstance() throws Exception {
+        if (settings == null) {
+            if(PathHandler.fileExists(PathHandler.PathToSettingsFile)){
+                String settingsFile = PathHandler.readFile(PathHandler.PathToSettingsFile);
+
+                try {
+                    settings = PMSerializer.deserialize(settingsFile, Settings.class);
+                } catch (Exception e) {
+                    settings = new Settings();
+                }
+
+            }
+            else {
+                settings = new Settings();
+                String ser = PMSerializer.serialize(settings);
+                PathHandler.writeFile(PathHandler.PathToSettingsFile, ser);
+            }
         }
 
         return settings;
     }
 
-
+    public void save() throws Exception {
+        String ser = PMSerializer.serialize(settings);
+        PathHandler.writeFile(PathHandler.PathToSettingsFile, ser);
+    }
 }
