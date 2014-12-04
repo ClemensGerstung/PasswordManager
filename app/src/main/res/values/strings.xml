@@ -11,8 +11,9 @@
     <string name="login_layout_button_create_user">Create User</string>
     <string name="login_layout_checkbox_save_login">Save Login</string>
 
-    <string name="password_list_menu_logout">Logout</string>
-    <string name="password_list_menu_new_password">New Password</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_new_password">New Password</string>
+    <string name="menu_change_password">Change Password</string>
 
     <string name="error_user_doesnt_exist">User doesn\'t exist!</string>;
     <string name="error_wrong_password">Wrong password!</string>
@@ -28,6 +29,7 @@
     <string name="add_edit_password_text_view_program">Program: </string>
     <string name="add_edit_password_text_view_username">Username: </string>
     <string name="add_edit_password_text_view_password">Password: </string>
+
 
 
 </resources>

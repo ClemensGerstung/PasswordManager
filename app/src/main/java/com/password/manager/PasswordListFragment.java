@@ -50,6 +50,10 @@ public class PasswordListFragment extends Fragment {
             case R.id.menu_new_password_entry:
                 AddEditPasswordHelper.addPassword(getActivity());
                 break;
+
+            case R.id.menu_change_password:
+
+                break;
         }
 
         return super.onOptionsItemSelected(item);

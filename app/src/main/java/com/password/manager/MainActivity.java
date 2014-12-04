@@ -6,6 +6,11 @@ import android.support.v7.app.ActionBarActivity;
 import com.password.manager.classes.PasswordListHandler;
 import com.password.manager.classes.User;
 
+// TODO: change main password
+// TODO: edit password entry
+// TODO: delete password entry
+// TODO: add-button move into actionbar
+// TODO:
 
 public class MainActivity extends ActionBarActivity {
 
