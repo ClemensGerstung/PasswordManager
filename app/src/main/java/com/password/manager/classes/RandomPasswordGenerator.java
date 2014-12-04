@@ -6,43 +6,60 @@ import java.util.Random;
  * Created by Clemens on 27.11.2014.
  */
 public class RandomPasswordGenerator {
-    private static final String ALPHA_CAPS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final String ALPHA = "abcdefghijklmnopqrstuvwxyz";
-    private static final String NUM = "0123456789";
-    private static final String SPL_CHARS = "!*_+-/&,.;:";
+    private static final String[] things =
+            {
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                    "abcdefghijklmnopqrstuvwxyz",
+                    "0123456789",
+                    "!*_+-/&,.;:"
+            };
 
-    public static char[] generatePswd(int minLen, int maxLen, int noOfCAPSAlpha, int noOfDigits, int noOfSplChars) {
+
+    public static String generatePassword(int minLen, int maxLen, int noOfCAPSAlpha, int noOfDigits, int noOfSplChars) {
         if (minLen > maxLen)
             throw new IllegalArgumentException("Min. Length > Max. Length!");
         if ((noOfCAPSAlpha + noOfDigits + noOfSplChars) > minLen)
-            throw new IllegalArgumentException("Min. Length should be atleast sum of (CAPS, DIGITS, SPL CHARS) Length!");
+            throw new IllegalArgumentException("Min. Length should be at least sum of (CAPS, DIGITS, SPL CHARS) Length!");
         Random rnd = new Random();
         int len = rnd.nextInt(maxLen - minLen + 1) + minLen;
-        char[] pswd = new char[len];
-        int index = 0;
-        for (int i = 0; i < noOfCAPSAlpha; i++) {
-            index = getNextIndex(rnd, len, pswd);
-            pswd[index] = ALPHA_CAPS.charAt(rnd.nextInt(ALPHA_CAPS.length()));
-        }
-        for (int i = 0; i < noOfDigits; i++) {
-            index = getNextIndex(rnd, len, pswd);
-            pswd[index] = NUM.charAt(rnd.nextInt(NUM.length()));
-        }
-        for (int i = 0; i < noOfSplChars; i++) {
-            index = getNextIndex(rnd, len, pswd);
-            pswd[index] = SPL_CHARS.charAt(rnd.nextInt(SPL_CHARS.length()));
-        }
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int []cnos = {
+                0,  // current count of alphas
+                0,  // current count of CAPS alphas
+                0,  // current count of digits
+                0   // current count of special chars
+        };
+
         for (int i = 0; i < len; i++) {
-            if (pswd[i] == 0) {
-                pswd[i] = ALPHA.charAt(rnd.nextInt(ALPHA.length()));
-            }
+            int r = generateDigit(rnd, cnos, len - noOfCAPSAlpha - noOfDigits - noOfSplChars, noOfCAPSAlpha, noOfDigits, noOfSplChars);
+            String s = things[r];
+            int c = rnd.nextInt(s.length());
+            stringBuilder.append(s.charAt(c));
         }
-        return pswd;
+
+        return stringBuilder.toString();
     }
 
-    private static int getNextIndex(Random rnd, int len, char[] pswd) {
-        int index = rnd.nextInt(len);
-        while (pswd[index = rnd.nextInt(len)] != 0) ;
-        return index;
+    private static int generateDigit(Random rnd, int[] cnos, int noOfAlpha, int noOfCAPSAlpha, int noOfDigits, int noOfSplChars)
+    {
+        int r = rnd.nextInt(4);
+        if(cnos[r] < noOfAlpha && r == 0){
+            cnos[r]++;
+            return r;
+        } else if(cnos[r] < noOfCAPSAlpha && r == 1){
+            cnos[r]++;
+            return r;
+        } else if(cnos[r] < noOfDigits && r == 2){
+            cnos[r]++;
+            return r;
+        } else if(cnos[r] < noOfSplChars && r == 3){
+            cnos[r]++;
+            return r;
+        } else {
+            generateDigit(rnd, cnos, noOfAlpha, noOfCAPSAlpha, noOfDigits, noOfSplChars);
+        }
+
+        return 0;
     }
 }

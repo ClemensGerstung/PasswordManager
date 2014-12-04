@@ -59,4 +59,12 @@ public class User {
 
         return user;
     }
+
+    public static void logout()
+    {
+        user.password = null;
+        user.username = null;
+        user.path = null;
+        user = null;
+    }
 }

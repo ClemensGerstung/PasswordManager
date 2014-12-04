@@ -18,8 +18,16 @@
     <string name="error_wrong_password">Wrong password!</string>
     <string name="error_no_user_input">Enter a username</string>
     <string name="error_no_password">Enter a password</string>
+    <string name="error_no_program">Enter a program</string>
     <string name="error_no_user_input_and_password">Enter a username and a password</string>
     <string name="error">Error: </string>
+
+    <string name="add_edit_password_helper_add_title">Add password</string>
+    <string name="add_edit_password_helper_cancel">Cancel</string>
+
+    <string name="add_edit_password_text_view_program">Program: </string>
+    <string name="add_edit_password_text_view_username">Username: </string>
+    <string name="add_edit_password_text_view_password">Password: </string>
 
 
 </resources>

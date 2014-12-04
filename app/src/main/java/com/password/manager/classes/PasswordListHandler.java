@@ -34,4 +34,20 @@ public class PasswordListHandler {
         return passwordListHandler;
     }
 
+    public static void logout()
+    {
+        passwordListHandler.objects = null;
+        passwordListHandler = null;
+    }
+
+    public List<Password> getObjects() {
+        return objects;
+    }
+
+    public void addAndSave(Password password) throws Exception {
+        objects.add(password);
+        String ser = PMSerializer.serialize(this);
+        String en = AESHelper.encrypt(ser, User.getInstance("").getPassword());
+        PathHandler.writeFile(User.getInstance("").getPath(), en);
+    }
 }

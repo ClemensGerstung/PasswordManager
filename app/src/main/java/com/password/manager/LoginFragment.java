@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.password.manager.classes.AESHelper;
-import com.password.manager.classes.PathHandler;
 import com.password.manager.classes.PasswordListHandler;
+import com.password.manager.classes.PathHandler;
 import com.password.manager.classes.Settings;
 import com.password.manager.classes.User;
 
@@ -109,6 +109,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
+
+        // TODO: create user button implementation
 
         return view;
     }

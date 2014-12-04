@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.password.manager.classes.PasswordListHandler;
 import com.password.manager.classes.Settings;
+import com.password.manager.classes.User;
 
 
 public class PasswordListFragment extends Fragment {
@@ -36,7 +37,18 @@ public class PasswordListFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.menu_logout:
+                User.logout();
+                PasswordListHandler.logout();
+                getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new LoginFragment()).commit();
+                break;
 
+            case R.id.menu_new_password_entry:
+                AddEditPasswordHelper.addPassword(getActivity());
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }
