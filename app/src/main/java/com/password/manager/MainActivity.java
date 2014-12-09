@@ -7,8 +7,6 @@ import com.password.manager.classes.PasswordListHandler;
 import com.password.manager.classes.User;
 
 // TODO: change main password
-// TODO: edit password entry
-// TODO: delete password entry
 // TODO: add-button move into actionbar
 // TODO: rotate/close save instance state handling
 // TODO: if main_user_name is empty remember user has to be unchecked

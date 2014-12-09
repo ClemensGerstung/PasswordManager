@@ -25,6 +25,8 @@
 
     <string name="add_edit_password_helper_add_title">Add password</string>
     <string name="add_edit_password_helper_cancel">Cancel</string>
+    <string name="add_edit_password_helper_edit">Edit</string>
+    <string name="add_edit_password_helper_delete">Delete</string>
 
     <string name="add_edit_password_text_view_program">Program: </string>
     <string name="add_edit_password_text_view_username">Username: </string>

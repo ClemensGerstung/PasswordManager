@@ -49,12 +49,16 @@ public class PasswordListHandler {
 
     public void addAndSave(Password password) throws Exception {
         objects.add(password);
-        String ser = PMSerializer.serialize(this);
-        String en = AESHelper.encrypt(ser, User.getInstance("").getPassword());
-        PathHandler.writeFile(User.getInstance("").getPath(), en);
+        save();
     }
 
     public static boolean isLoggedIn(){
         return passwordListHandler != null;
+    }
+
+    public void save() throws Exception {
+        String ser = PMSerializer.serialize(this);
+        String en = AESHelper.encrypt(ser, User.getInstance("").getPassword());
+        PathHandler.writeFile(User.getInstance("").getPath(), en);
     }
 }

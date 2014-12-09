@@ -24,6 +24,7 @@ import com.password.manager.classes.User;
 public class PasswordListFragment extends Fragment {
 
     private ListView passwordListView;
+    private PasswordListAdapter passwordListAdapter;
 
     public PasswordListFragment() {
         setHasOptionsMenu(true);
@@ -66,7 +67,7 @@ public class PasswordListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.password_list_layout, container, false);
         passwordListView = (ListView) view.findViewById(R.id.password_list_list_view);
-        PasswordListAdapter passwordListAdapter = null;
+
         try {
             passwordListAdapter = new PasswordListAdapter(getActivity(), PasswordListHandler.getInstance().objects, Settings.getInstance().isSaveLogin());
         } catch (Exception e) {
@@ -78,7 +79,11 @@ public class PasswordListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    AddEditPasswordHelper.showPassword(getActivity(), PasswordListHandler.getInstance().getObjects().get(position));
+                    AddEditPasswordHelper.showPassword(
+                            getActivity(),
+                            PasswordListHandler.getInstance().getObjects().get(position),
+                            position,
+                            passwordListAdapter);
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }

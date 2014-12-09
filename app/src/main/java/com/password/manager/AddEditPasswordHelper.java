@@ -73,7 +73,7 @@ public class AddEditPasswordHelper {
 
     }
 
-    public static void showPassword(final Context context, Password password) throws Exception {
+    public static void showPassword(final Context context, Password password, final int position, final PasswordListAdapter passwordListAdapter) throws Exception {
 
 
         final PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
@@ -90,10 +90,12 @@ public class AddEditPasswordHelper {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(context.getResources().getString(R.string.add_edit_password_helper_add_title))
                 .setView(view)
-                .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.add_edit_password_helper_delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+
+                        removePassword(context, position, passwordListAdapter);
                     }
                 })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -102,10 +104,10 @@ public class AddEditPasswordHelper {
                         dialog.dismiss();
                     }
                 })
-                        // TODO: extract to strings.xml
-                .setNeutralButton("Edit", new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.add_edit_password_helper_edit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // TODO: edit
                         dialog.dismiss();
                     }
                 });
@@ -146,6 +148,36 @@ public class AddEditPasswordHelper {
         }
     }
 
+    public static void editPassword(final Context context, final int index){
+
+    }
+
+    public static void removePassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter){
+        new AlertDialog.Builder(context)
+                .setTitle(getString(context, R.string.add_edit_password_helper_delete))
+                // TODO: extract to strings.xml
+                .setMessage("Are you sure?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            PasswordListHandler.getInstance().getObjects().remove(index);
+                            PasswordListHandler.getInstance().save();
+                            passwordListAdapter.notifyDataSetChanged();
+                        } catch (Exception e) {
+                            Toast.makeText(context, getString(context, R.string.error_wrong_password), Toast.LENGTH_LONG).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 
     private static String getString(Context context, int id) {
         return context.getResources().getString(id);
