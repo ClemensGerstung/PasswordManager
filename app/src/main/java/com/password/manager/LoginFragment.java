@@ -86,6 +86,8 @@ public class LoginFragment extends Fragment {
                     String en_pas = AESHelper.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString()).replace("\n", "");
                     if (!user.getPassword().equals(en_pas)) {
                         throw new Exception(getResourceString(R.string.error_wrong_password));
+                    } else if (en_pas.length() == 0) {
+                        throw new Exception(getResourceString(R.string.error_no_password));
                     } else {
                         user.setPassword(passwordCharSequence.toString());
 
@@ -104,7 +106,7 @@ public class LoginFragment extends Fragment {
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment()).commit();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage() + "\n", Toast.LENGTH_LONG).show();
                     User.logout();
                     PasswordListHandler.logout();
                 }

@@ -60,8 +60,13 @@ public class User {
         return user;
     }
 
+    public static boolean isLoggedIn(){
+        return user != null;
+    }
+
     public static void logout()
     {
+        if(!isLoggedIn()) return;
         user.password = null;
         user.username = null;
         user.path = null;

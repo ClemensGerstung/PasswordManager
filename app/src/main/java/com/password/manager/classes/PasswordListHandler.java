@@ -30,12 +30,15 @@ public class PasswordListHandler {
     }
 
     public static PasswordListHandler createPasswordListHandlerFromString(String data) throws Exception {
+        data = data.replace("<username></", "<username> </");
+
         passwordListHandler = PMSerializer.deserialize(data, PasswordListHandler.class);
         return passwordListHandler;
     }
 
     public static void logout()
     {
+        if(!isLoggedIn()) return;
         passwordListHandler.objects = null;
         passwordListHandler = null;
     }
@@ -49,5 +52,9 @@ public class PasswordListHandler {
         String ser = PMSerializer.serialize(this);
         String en = AESHelper.encrypt(ser, User.getInstance("").getPassword());
         PathHandler.writeFile(User.getInstance("").getPath(), en);
+    }
+
+    public static boolean isLoggedIn(){
+        return passwordListHandler != null;
     }
 }

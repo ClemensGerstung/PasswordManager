@@ -30,6 +30,6 @@
     <string name="add_edit_password_text_view_username">Username: </string>
     <string name="add_edit_password_text_view_password">Password: </string>
 
-
+    <string name="show_password_header">Password</string>
 
 </resources>

@@ -37,7 +37,7 @@ public class AddEditPasswordHelper {
         });
 
         new AlertDialog.Builder(context)
-                .setTitle(context.getResources().getString(R.string.add_edit_password_helper_add_title))
+                .setTitle(context.getResources().getString(R.string.show_password_header))
                 .setView(view)
                 .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
                     @Override

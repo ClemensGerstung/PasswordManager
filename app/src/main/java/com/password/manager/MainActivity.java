@@ -10,7 +10,9 @@ import com.password.manager.classes.User;
 // TODO: edit password entry
 // TODO: delete password entry
 // TODO: add-button move into actionbar
-// TODO:
+// TODO: rotate/close save instance state handling
+// TODO: if main_user_name is empty remember user has to be unchecked
+// TODO: set animations on swaping fragments
 
 public class MainActivity extends ActionBarActivity {
 
@@ -19,7 +21,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
-        getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new LoginFragment()).commit();
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
+                .commit();
     }
 
     @Override
@@ -29,15 +34,26 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        logout();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
-        //TODO: logout()
+        //TODO: logout();
 
     }
 
     public void logout() {
         User.logout();
         PasswordListHandler.logout();
-        getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new LoginFragment()).commit();
+        getFragmentManager()
+                .beginTransaction()
+                //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
+                .commit();
+
     }
 }

@@ -59,6 +59,8 @@ public class PasswordListFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
