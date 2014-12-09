@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.password.manager.classes.Password;
 import com.password.manager.classes.PasswordListHandler;
 import com.password.manager.classes.RandomPasswordGenerator;
+import com.password.manager.classes.Settings;
+import com.password.manager.classes.User;
 
 
 /**
@@ -71,7 +73,9 @@ public class AddEditPasswordHelper {
 
     }
 
-    public static void showPassword(final Context context, Password password) {
+    public static void showPassword(final Context context, Password password) throws Exception {
+
+
         final PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
         View view = View.inflate(context, R.layout.show_passowrd_layout, null);
 
@@ -83,7 +87,7 @@ public class AddEditPasswordHelper {
         username_text_view.setText(password.getUsername(), TextView.BufferType.NORMAL);
         password_text_view.setText(password.getPassword(), TextView.BufferType.NORMAL);
 
-        new AlertDialog.Builder(context)
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(context.getResources().getString(R.string.add_edit_password_helper_add_title))
                 .setView(view)
                 .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
@@ -98,14 +102,48 @@ public class AddEditPasswordHelper {
                         dialog.dismiss();
                     }
                 })
-                // TODO: extract to strings.xml
+                        // TODO: extract to strings.xml
                 .setNeutralButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                })
-                .show();
+                });
+
+        if (Settings.getInstance().isSaveLogin()) {
+            View view1 = View.inflate(context, R.layout.save_login_show_password_relogin, null);
+            final TextView master_password_text_view = (TextView) view1.findViewById(R.id.save_login_show_password_relogin_edit_text);
+
+            new AlertDialog.Builder(context)
+                    .setTitle(context.getResources().getString(R.string.add_edit_password_helper_add_title))
+                    .setView(view1)
+                    .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            String pw = master_password_text_view.getText().toString();
+                            try {
+                                if (pw.equals(User.getInstance("").getPassword())) {
+                                    builder.show();
+                                } else {
+                                    Toast.makeText(context, getString(context, R.string.error_wrong_password), Toast.LENGTH_LONG).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            dialog.dismiss();
+                        }
+                    }).show();
+        } else if (!Settings.getInstance().isSaveLogin()){
+            builder.show();
+        }
     }
 
 

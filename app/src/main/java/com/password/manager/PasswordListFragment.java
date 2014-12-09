@@ -77,7 +77,11 @@ public class PasswordListFragment extends Fragment {
         passwordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AddEditPasswordHelper.showPassword(getActivity(), PasswordListHandler.getInstance().getObjects().get(position));
+                try {
+                    AddEditPasswordHelper.showPassword(getActivity(), PasswordListHandler.getInstance().getObjects().get(position));
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
