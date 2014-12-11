@@ -107,7 +107,7 @@ public class AddEditPasswordHelper {
                 .setNeutralButton(R.string.add_edit_password_helper_edit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO: edit
+                        editPassword(context, position, passwordListAdapter);
                         dialog.dismiss();
                     }
                 });
@@ -148,15 +148,73 @@ public class AddEditPasswordHelper {
         }
     }
 
-    public static void editPassword(final Context context, final int index){
+    public static void editPassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter){
+        final PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
+        View view = View.inflate(context, R.layout.add_edit_password_layout, null);
 
+        final EditText program_edit_text = (EditText) view.findViewById(R.id.add_edit_password_edit_text_program);
+        final EditText username_edit_text = (EditText) view.findViewById(R.id.add_edit_password_edit_text_username);
+        final EditText password_edit_text = (EditText) view.findViewById(R.id.add_edit_password_edit_text_password);
+
+        password_edit_text.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                password_edit_text.setText(RandomPasswordGenerator.generatePassword(10, 15, 2, 4, 4), TextView.BufferType.NORMAL);
+
+                return true;
+            }
+        });
+
+        Password password = passwordListHandler.getObjects().get(index);
+
+        program_edit_text.setText(password.getHeader());
+        username_edit_text.setText(password.getUsername());
+        password_edit_text.setText(password.getPassword());
+
+        new AlertDialog.Builder(context)
+                .setTitle(context.getResources().getString(R.string.add_edit_password_helper_edit))
+                .setView(view)
+                .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String program = program_edit_text.getText().toString();
+                        String username = username_edit_text.getText().toString();
+                        String password = password_edit_text.getText().toString();
+
+                        if (program.length() == 0) {
+                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_program), Toast.LENGTH_LONG).show();
+                        } else if (password.length() == 0) {
+                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_password), Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                Password ps = new Password(program, username, password);
+                                PasswordListHandler plh = PasswordListHandler.getInstance();
+                                plh.getObjects().set(index, ps);
+                                plh.save();
+
+                                passwordListAdapter.notifyDataSetChanged();
+                            } catch (Exception e) {
+                                Toast.makeText(context, getString(context, R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+
+                            dialog.dismiss();
+                        }
+                    }
+                })
+                .show();
     }
 
     public static void removePassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter){
         new AlertDialog.Builder(context)
                 .setTitle(getString(context, R.string.add_edit_password_helper_delete))
-                // TODO: extract to strings.xml
-                .setMessage("Are you sure?")
+                .setMessage(R.string.add_edit_password_helper_delete_message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
