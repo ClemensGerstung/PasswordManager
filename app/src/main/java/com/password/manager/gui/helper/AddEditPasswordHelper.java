@@ -1,4 +1,4 @@
-package com.password.manager;
+package com.password.manager.gui.helper;
 
 
 import android.app.AlertDialog;
@@ -9,11 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.password.manager.classes.Password;
-import com.password.manager.classes.PasswordListHandler;
-import com.password.manager.classes.RandomPasswordGenerator;
-import com.password.manager.classes.Settings;
-import com.password.manager.classes.User;
+import com.password.manager.PasswordListAdapter;
+import com.password.manager.R;
+import com.password.manager.core.Password;
+import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.core.RandomPasswordGenerator;
+import com.password.manager.core.Settings;
+import com.password.manager.core.User;
 
 
 /**

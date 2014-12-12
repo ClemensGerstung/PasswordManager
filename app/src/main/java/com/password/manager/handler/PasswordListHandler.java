@@ -1,4 +1,7 @@
-package com.password.manager.classes;
+package com.password.manager.handler;
+
+import com.password.manager.core.Password;
+import com.password.manager.core.User;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -32,7 +35,7 @@ public class PasswordListHandler {
     public static PasswordListHandler createPasswordListHandlerFromString(String data) throws Exception {
         data = data.replace("<username></", "<username> </");
 
-        passwordListHandler = PMSerializer.deserialize(data, PasswordListHandler.class);
+        passwordListHandler = SerializerHandler.deserialize(data, PasswordListHandler.class);
         return passwordListHandler;
     }
 
@@ -57,8 +60,8 @@ public class PasswordListHandler {
     }
 
     public void save() throws Exception {
-        String ser = PMSerializer.serialize(this);
-        String en = AESHelper.encrypt(ser, User.getInstance("").getPassword());
+        String ser = SerializerHandler.serialize(this);
+        String en = AESHandler.encrypt(ser, User.getInstance("").getPassword());
         PathHandler.writeFile(User.getInstance("").getPath(), en);
     }
 }

@@ -1,4 +1,6 @@
-package com.password.manager.classes;
+package com.password.manager.core;
+
+import com.password.manager.handler.SerializerHandler;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -54,7 +56,7 @@ public class User {
     public static User getInstance(String user_file) throws Exception {
         if(user == null && user_file != null)
         {
-            user = PMSerializer.deserialize(user_file, User.class);
+            user = SerializerHandler.deserialize(user_file, User.class);
         }
 
         return user;

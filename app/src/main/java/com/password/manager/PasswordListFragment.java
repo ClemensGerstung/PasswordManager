@@ -2,7 +2,6 @@ package com.password.manager;
 
 
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,10 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.password.manager.classes.Password;
-import com.password.manager.classes.PasswordListHandler;
-import com.password.manager.classes.Settings;
-import com.password.manager.classes.User;
+import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.core.Settings;
+import com.password.manager.core.User;
+import com.password.manager.gui.helper.AddEditPasswordHelper;
 
 
 public class PasswordListFragment extends Fragment {
@@ -45,13 +44,14 @@ public class PasswordListFragment extends Fragment {
             case R.id.menu_logout:
                 User.logout();
                 PasswordListHandler.logout();
-                getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new LoginFragment()).commit();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
+                        .commit();
                 break;
-
             case R.id.menu_new_password_entry:
                 AddEditPasswordHelper.addPassword(getActivity());
                 break;
-
             case R.id.menu_change_password:
 
                 break;

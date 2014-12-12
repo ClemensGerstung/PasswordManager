@@ -1,4 +1,7 @@
-package com.password.manager.classes;
+package com.password.manager.core;
+
+import com.password.manager.handler.SerializerHandler;
+import com.password.manager.handler.PathHandler;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -48,7 +51,7 @@ public class Settings {
                 String settingsFile = PathHandler.readFile(PathHandler.PathToSettingsFile);
 
                 try {
-                    settings = PMSerializer.deserialize(settingsFile, Settings.class);
+                    settings = SerializerHandler.deserialize(settingsFile, Settings.class);
                 } catch (Exception e) {
                     settings = new Settings();
                 }
@@ -56,7 +59,7 @@ public class Settings {
             }
             else {
                 settings = new Settings();
-                String ser = PMSerializer.serialize(settings);
+                String ser = SerializerHandler.serialize(settings);
                 PathHandler.writeFile(PathHandler.PathToSettingsFile, ser);
             }
         }
@@ -65,7 +68,7 @@ public class Settings {
     }
 
     public void save() throws Exception {
-        String ser = PMSerializer.serialize(settings);
+        String ser = SerializerHandler.serialize(settings);
         PathHandler.writeFile(PathHandler.PathToSettingsFile, ser);
     }
 }

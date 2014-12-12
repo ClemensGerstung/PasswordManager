@@ -3,8 +3,8 @@ package com.password.manager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.password.manager.classes.PasswordListHandler;
-import com.password.manager.classes.User;
+import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.core.User;
 
 // TODO: change main password
 // TODO: add-button move into actionbar

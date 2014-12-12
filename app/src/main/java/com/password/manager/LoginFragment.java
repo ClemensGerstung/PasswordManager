@@ -13,11 +13,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.password.manager.classes.AESHelper;
-import com.password.manager.classes.PasswordListHandler;
-import com.password.manager.classes.PathHandler;
-import com.password.manager.classes.Settings;
-import com.password.manager.classes.User;
+import com.password.manager.handler.AESHandler;
+import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.handler.PathHandler;
+import com.password.manager.core.Settings;
+import com.password.manager.core.User;
 
 import java.io.File;
 
@@ -102,7 +102,7 @@ public class LoginFragment extends Fragment {
                     String user_file = PathHandler.readFile(path);
                     User user = User.getInstance(user_file);
 
-                    String en_pas = AESHelper.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString()).replace("\n", "");
+                    String en_pas = AESHandler.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString()).replace("\n", "");
                     if (!user.getPassword().equals(en_pas)) {
                         throw new Exception(getResourceString(R.string.error_wrong_password));
                     } else if (en_pas.length() == 0) {
@@ -112,7 +112,7 @@ public class LoginFragment extends Fragment {
 
                         String key_file = PathHandler.readFile(PathHandler.PathToKeys + File.separator + nameCharSequence + ".xml");
 
-                        String de_key_file = AESHelper.decrypt(key_file, user.getPassword());
+                        String de_key_file = AESHandler.decrypt(key_file, user.getPassword());
 
                         PasswordListHandler passwordListHandler = PasswordListHandler.createPasswordListHandlerFromString(de_key_file);
 
@@ -134,6 +134,8 @@ public class LoginFragment extends Fragment {
 
 
         // TODO: create user button implementation
+
+
 
         return view;
     }

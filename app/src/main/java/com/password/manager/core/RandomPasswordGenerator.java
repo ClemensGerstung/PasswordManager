@@ -1,4 +1,4 @@
-package com.password.manager.classes;
+package com.password.manager.core;
 
 import java.util.Random;
 

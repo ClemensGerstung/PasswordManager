@@ -1,4 +1,4 @@
-package com.password.manager.classes;
+package com.password.manager.handler;
 
 import android.os.Environment;
 

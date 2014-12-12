@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.password.manager.classes.Password;
+import com.password.manager.core.Password;
 
 import java.util.List;
 

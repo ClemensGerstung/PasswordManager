@@ -1,4 +1,4 @@
-package com.password.manager.classes;
+package com.password.manager.handler;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
@@ -10,7 +10,7 @@ import java.io.StringWriter;
 /**
  * Created by Clemens on 27.11.2014.
  */
-public class PMSerializer {
+public class SerializerHandler {
     public static <T> String serialize(T clazz) throws Exception {
         Serializer serializer = new Persister(new AnnotationStrategy());
 
