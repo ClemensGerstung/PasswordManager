@@ -1,15 +1,19 @@
 package com.password.manager.core;
 
+import com.password.manager.handler.PathHandler;
 import com.password.manager.handler.SerializerHandler;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
+
+import java.io.File;
 
 /**
  * Created by Clemens on 03.09.2014.
  */
 
 /// one of the old classes
+/// but modified a lot...
 @Root(name = "user")
 public class User {
     @Element(name = "name")
@@ -60,6 +64,11 @@ public class User {
         }
 
         return user;
+    }
+
+    public void save() throws Exception {
+        String ser = SerializerHandler.serialize(this);
+        PathHandler.writeFile(PathHandler.PathToUsers + File.pathSeparator + username + ".xml", ser);
     }
 
     public static boolean isLoggedIn(){

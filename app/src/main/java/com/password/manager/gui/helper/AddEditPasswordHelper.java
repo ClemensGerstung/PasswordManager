@@ -7,10 +7,10 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.password.manager.PasswordListAdapter;
+import com.password.manager.core.PasswordListAdapter;
 import com.password.manager.R;
+import com.password.manager.core.Logger;
 import com.password.manager.core.Password;
 import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.core.RandomPasswordGenerator;
@@ -57,14 +57,14 @@ public class AddEditPasswordHelper {
                         String password = password_edit_text.getText().toString();
 
                         if (program.length() == 0) {
-                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_program), Toast.LENGTH_LONG).show();
+                            Logger.show( R.string.error_no_program, context);
                         } else if (password.length() == 0) {
-                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_password), Toast.LENGTH_LONG).show();
+                            Logger.show(R.string.error_no_password, context);
                         } else {
                             try {
                                 passwordListHandler.addAndSave(new Password(program, username, password));
                             } catch (Exception e) {
-                                Toast.makeText(context, getString(context, R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                Logger.show(e.getMessage(), context);
                             }
 
                             dialog.dismiss();
@@ -136,10 +136,10 @@ public class AddEditPasswordHelper {
                                 if (pw.equals(User.getInstance("").getPassword())) {
                                     builder.show();
                                 } else {
-                                    Toast.makeText(context, getString(context, R.string.error_wrong_password), Toast.LENGTH_LONG).show();
+                                    Logger.show(R.string.error_wrong_password, context);
                                 }
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                Logger.show(e.getMessage(), context);
                             }
 
                             dialog.dismiss();
@@ -191,9 +191,9 @@ public class AddEditPasswordHelper {
                         String password = password_edit_text.getText().toString();
 
                         if (program.length() == 0) {
-                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_program), Toast.LENGTH_LONG).show();
+                            Logger.show(R.string.error_no_program, context);
                         } else if (password.length() == 0) {
-                            Toast.makeText(context, getString(context, R.string.error) + " " + getString(context, R.string.error_no_password), Toast.LENGTH_LONG).show();
+                            Logger.show(R.string.error_no_password, context);
                         } else {
                             try {
                                 Password ps = new Password(program, username, password);
@@ -203,7 +203,7 @@ public class AddEditPasswordHelper {
 
                                 passwordListAdapter.notifyDataSetChanged();
                             } catch (Exception e) {
-                                Toast.makeText(context, getString(context, R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                Logger.show(e.getMessage(), context);
                             }
 
                             dialog.dismiss();
@@ -215,7 +215,7 @@ public class AddEditPasswordHelper {
 
     public static void removePassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter){
         new AlertDialog.Builder(context)
-                .setTitle(getString(context, R.string.add_edit_password_helper_delete))
+                .setTitle(Logger.getResourceString(R.string.add_edit_password_helper_delete, context))
                 .setMessage(R.string.add_edit_password_helper_delete_message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -225,7 +225,7 @@ public class AddEditPasswordHelper {
                             PasswordListHandler.getInstance().save();
                             passwordListAdapter.notifyDataSetChanged();
                         } catch (Exception e) {
-                            Toast.makeText(context, getString(context, R.string.error_wrong_password), Toast.LENGTH_LONG).show();
+                            Logger.show(e.getMessage(), context);
                         }
                         dialog.dismiss();
                     }
@@ -237,9 +237,5 @@ public class AddEditPasswordHelper {
                     }
                 })
                 .show();
-    }
-
-    private static String getString(Context context, int id) {
-        return context.getResources().getString(id);
     }
 }

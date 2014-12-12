@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.password.manager.core.Logger;
 import com.password.manager.handler.AESHandler;
 import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.handler.PathHandler;
@@ -104,9 +105,9 @@ public class LoginFragment extends Fragment {
 
                     String en_pas = AESHandler.encrypt(passwordCharSequence.toString(), passwordCharSequence.toString()).replace("\n", "");
                     if (!user.getPassword().equals(en_pas)) {
-                        throw new Exception(getResourceString(R.string.error_wrong_password));
+                        throw new Exception(Logger.getResourceString(R.string.error_wrong_password, getActivity()));
                     } else if (en_pas.length() == 0) {
-                        throw new Exception(getResourceString(R.string.error_no_password));
+                        throw new Exception(Logger.getResourceString(R.string.error_no_password, getActivity()));
                     } else {
                         user.setPassword(passwordCharSequence.toString());
 
@@ -125,7 +126,7 @@ public class LoginFragment extends Fragment {
                         getActivity().getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment()).commit();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage() + "\n", Toast.LENGTH_LONG).show();
+                    Logger.show(e.getMessage(), getActivity());
                     User.logout();
                     PasswordListHandler.logout();
                 }

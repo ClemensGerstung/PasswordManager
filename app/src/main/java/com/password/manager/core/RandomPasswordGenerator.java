@@ -6,6 +6,9 @@ import java.util.Random;
  * Created by Clemens on 27.11.2014.
  */
 public class RandomPasswordGenerator {
+
+    // TODO: improve it!
+
     private static final String[] things =
             {
                     "ABCDEFGHIJKLMNOPQRSTUVWXYZ",

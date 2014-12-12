@@ -1,4 +1,4 @@
-package com.password.manager;
+package com.password.manager.core;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.password.manager.R;
 import com.password.manager.core.Password;
 
 import java.util.List;

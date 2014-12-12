@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.password.manager.core.Logger;
+import com.password.manager.core.PasswordListAdapter;
+import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
 import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
@@ -53,7 +55,11 @@ public class PasswordListFragment extends Fragment {
                 AddEditPasswordHelper.addPassword(getActivity());
                 break;
             case R.id.menu_change_password:
-
+                try {
+                    ChangeMasterPasswordHelper.ChangeMasterPassword(getActivity());
+                } catch (Exception e) {
+                    Logger.show(e.getMessage(), getActivity());
+                }
                 break;
         }
 
@@ -71,7 +77,7 @@ public class PasswordListFragment extends Fragment {
         try {
             passwordListAdapter = new PasswordListAdapter(getActivity(), PasswordListHandler.getInstance().objects, Settings.getInstance().isSaveLogin());
         } catch (Exception e) {
-            Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Logger.show(e.getMessage(), getActivity());
         }
         passwordListView.setAdapter(passwordListAdapter);
 
@@ -85,15 +91,11 @@ public class PasswordListFragment extends Fragment {
                             position,
                             passwordListAdapter);
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), getResourceString(R.string.error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Logger.show(e.getMessage(), getActivity());
                 }
             }
         });
 
         return view;
-    }
-
-    public String getResourceString(int id) {
-        return getActivity().getResources().getString(id);
     }
 }
