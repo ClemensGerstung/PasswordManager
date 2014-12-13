@@ -1,5 +1,6 @@
 package com.password.manager.core;
 
+import com.password.manager.handler.AESHandler;
 import com.password.manager.handler.PathHandler;
 import com.password.manager.handler.SerializerHandler;
 
@@ -67,8 +68,10 @@ public class User {
     }
 
     public void save() throws Exception {
-        String ser = SerializerHandler.serialize(this);
-        PathHandler.writeFile(PathHandler.PathToUsers + File.pathSeparator + username + ".xml", ser);
+        User user = new User(this.username, this.password, this.path);
+        user.setPassword(AESHandler.encrypt(user.getPassword(), user.getPassword()));
+        String ser = SerializerHandler.serialize(user);
+        PathHandler.writeFile(PathHandler.PathToUsers + File.pathSeparator + user.username + ".xml", ser);
     }
 
     public static boolean isLoggedIn(){

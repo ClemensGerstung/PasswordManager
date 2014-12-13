@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.password.manager.core.Logger;
+import com.password.manager.gui.helper.CreateUserHelper;
 import com.password.manager.handler.AESHandler;
 import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.handler.PathHandler;
@@ -133,9 +134,12 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
-        // TODO: create user button implementation
-
+        create_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateUserHelper.createUser(getActivity());
+            }
+        });
 
 
         return view;

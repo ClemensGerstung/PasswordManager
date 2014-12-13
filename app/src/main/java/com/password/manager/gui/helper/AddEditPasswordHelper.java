@@ -43,7 +43,7 @@ public class AddEditPasswordHelper {
         new AlertDialog.Builder(context)
                 .setTitle(context.getResources().getString(R.string.show_password_header))
                 .setView(view)
-                .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.helper_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -90,9 +90,9 @@ public class AddEditPasswordHelper {
         password_text_view.setText(password.getPassword(), TextView.BufferType.NORMAL);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setTitle(context.getResources().getString(R.string.add_edit_password_helper_add_title))
+                .setTitle(context.getResources().getString(R.string.helper_add_title))
                 .setView(view)
-                .setNegativeButton(R.string.add_edit_password_helper_delete, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.helper_delete, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -106,7 +106,7 @@ public class AddEditPasswordHelper {
                         dialog.dismiss();
                     }
                 })
-                .setNeutralButton(R.string.add_edit_password_helper_edit, new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.helper_edit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editPassword(context, position, passwordListAdapter);
@@ -119,9 +119,9 @@ public class AddEditPasswordHelper {
             final TextView master_password_text_view = (TextView) view1.findViewById(R.id.save_login_show_password_relogin_edit_text);
 
             new AlertDialog.Builder(context)
-                    .setTitle(context.getResources().getString(R.string.add_edit_password_helper_add_title))
+                    .setTitle(context.getResources().getString(R.string.helper_add_title))
                     .setView(view1)
-                    .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.helper_cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -175,9 +175,9 @@ public class AddEditPasswordHelper {
         password_edit_text.setText(password.getPassword());
 
         new AlertDialog.Builder(context)
-                .setTitle(context.getResources().getString(R.string.add_edit_password_helper_edit))
+                .setTitle(context.getResources().getString(R.string.helper_edit))
                 .setView(view)
-                .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.helper_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -215,8 +215,8 @@ public class AddEditPasswordHelper {
 
     public static void removePassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter){
         new AlertDialog.Builder(context)
-                .setTitle(Logger.getResourceString(R.string.add_edit_password_helper_delete, context))
-                .setMessage(R.string.add_edit_password_helper_delete_message)
+                .setTitle(Logger.getResourceString(R.string.helper_delete, context))
+                .setMessage(R.string.helper_delete_message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -230,7 +230,7 @@ public class AddEditPasswordHelper {
                         dialog.dismiss();
                     }
                 })
-                .setNegativeButton(R.string.add_edit_password_helper_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.helper_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
