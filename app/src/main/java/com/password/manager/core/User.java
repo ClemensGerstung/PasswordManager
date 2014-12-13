@@ -69,9 +69,9 @@ public class User {
 
     public void save() throws Exception {
         User user = new User(this.username, this.password, this.path);
-        user.setPassword(AESHandler.encrypt(user.getPassword(), user.getPassword()));
+        user.setPassword(AESHandler.encrypt(user.getPassword(), user.getPassword()).replace("\n", ""));
         String ser = SerializerHandler.serialize(user);
-        PathHandler.writeFile(PathHandler.PathToUsers + File.pathSeparator + user.username + ".xml", ser);
+        PathHandler.writeFile(PathHandler.PathToUsers + File.separator + user.username + ".xml", ser);
     }
 
     public static boolean isLoggedIn(){

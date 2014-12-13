@@ -14,12 +14,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.password.manager.core.Logger;
+import com.password.manager.core.Settings;
+import com.password.manager.core.User;
 import com.password.manager.gui.helper.CreateUserHelper;
 import com.password.manager.handler.AESHandler;
 import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.handler.PathHandler;
-import com.password.manager.core.Settings;
-import com.password.manager.core.User;
 
 import java.io.File;
 
@@ -70,7 +70,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(remember_user.isChecked()) remember_user.setChecked(s.length() > 0);
+                if (remember_user.isChecked()) remember_user.setChecked(s.length() > 0);
             }
 
             @Override
@@ -113,10 +113,12 @@ public class LoginFragment extends Fragment {
                         user.setPassword(passwordCharSequence.toString());
 
                         String key_file = PathHandler.readFile(PathHandler.PathToKeys + File.separator + nameCharSequence + ".xml");
-
-                        String de_key_file = AESHandler.decrypt(key_file, user.getPassword());
-
-                        PasswordListHandler passwordListHandler = PasswordListHandler.createPasswordListHandlerFromString(de_key_file);
+                        if (key_file.isEmpty()) {
+                            PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
+                        } else {
+                            String de_key_file = AESHandler.decrypt(key_file, user.getPassword());
+                            PasswordListHandler passwordListHandler = PasswordListHandler.createPasswordListHandlerFromString(de_key_file);
+                        }
 
                         Settings settings = Settings.getInstance();
                         settings.setSaveLogin(saveLogin.isChecked());

@@ -47,6 +47,7 @@ public class ChangeMasterPasswordHelper {
                         String repeatPW = repeatPasswordEditText.getText().toString();
 
                         // TODO: extract strings to strings.xml
+                        // TODO: check if new password equals old password
                         if (oldPW.isEmpty()) {
                             Logger.show("Old password can't be empty", context);
                         } else if (newPW.isEmpty()) {

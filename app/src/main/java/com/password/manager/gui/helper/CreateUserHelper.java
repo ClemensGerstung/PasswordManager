@@ -6,10 +6,13 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.password.manager.R;
 import com.password.manager.core.Logger;
+import com.password.manager.core.User;
+import com.password.manager.handler.PathHandler;
+
+import java.io.File;
 
 /**
  * Created by Clemens on 12.12.2014.
@@ -26,12 +29,12 @@ public class CreateUserHelper {
 
 
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
-                                    .setTitle(R.string.helper_create_user)
-                                    .setView(view)
-                                    .setCancelable(true)
-                                    .setNegativeButton(R.string.helper_cancel, null)
-                                    .setPositiveButton("OK", null)
-                                    .create();
+                .setTitle(R.string.helper_create_user)
+                .setView(view)
+                .setCancelable(true)
+                .setNegativeButton(R.string.helper_cancel, null)
+                .setPositiveButton("OK", null)
+                .create();
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -40,13 +43,26 @@ public class CreateUserHelper {
 
                     @Override
                     public void onClick(View view) {
-                        // TODO: check if user exists
-                        // TODO: check if passwords match
-                        // TODO: create user file and key file
+                        // TODO: extract strings to strings.xml
+                        String pathToUser = PathHandler.PathToUsers + File.separator + userEditText.getText().toString() + ".xml";
+                        String pathToKey = PathHandler.PathToKeys + File.separator + userEditText.getText().toString() + ".xml";
+                        String newPassword = newPasswordEditText.getText().toString();
+                        String repeatPassword = repeatPasswordEditText.getText().toString();
+                        if (PathHandler.fileExists(pathToUser)) {
+                            Logger.show("User already exists! Choose another name", context);
+                        } else if (!newPassword.equals(repeatPassword)) {
+                            Logger.show("The passwords don't match", context);
+                        } else {
+                            try {
+                                User user = new User(userEditText.getText().toString(), newPassword, pathToKey);
+                                user.save();
+                                PathHandler.writeFile(pathToKey, "");
 
-
-
-                        //alertDialog.dismiss();
+                                alertDialog.dismiss();
+                            } catch (Exception e) {
+                                Logger.show(e.getMessage(), context);
+                            }
+                        }
                     }
                 });
             }
