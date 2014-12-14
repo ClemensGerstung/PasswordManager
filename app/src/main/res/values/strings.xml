@@ -22,6 +22,8 @@
     <string name="error_no_program">Enter a program</string>
     <string name="error_no_user_input_and_password">Enter a username and a password</string>
     <string name="error">Error: </string>
+    <string name="error_user_exists">User already exists! Choose another name</string>
+    <string name="error_password_dont_match">The passwords don\'t match</string>
 
     <string name="helper_add_title">Add password</string>
     <string name="helper_cancel">Cancel</string>
@@ -34,6 +36,7 @@
     <string name="add_edit_password_text_view_program">Program: </string>
     <string name="add_edit_password_text_view_username">Username: </string>
     <string name="add_edit_password_text_view_password">Password: </string>
+
 
     <string name="show_password_header">Password</string>
     <string name="change_master_password_old_password">Old password:</string>

@@ -13,6 +13,9 @@ import java.io.StringWriter;
 /// Just for using
 @Root(name = "PasswordFile")
 public class Password {
+
+    public static final String PasswordREGEX = "^((?=.*\\d)(?=.*[a-zA-Z])[a-zA-Z0-9!*_+-/;:]{6,20})$";
+
     @Element(name = "header")
     private String header;
     @Element(name = "username")

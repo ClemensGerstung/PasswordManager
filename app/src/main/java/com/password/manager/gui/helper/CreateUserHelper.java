@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.password.manager.R;
 import com.password.manager.core.Logger;
+import com.password.manager.core.Password;
 import com.password.manager.core.User;
 import com.password.manager.handler.PathHandler;
 
@@ -43,16 +44,19 @@ public class CreateUserHelper {
 
                     @Override
                     public void onClick(View view) {
-                        // TODO: extract strings to strings.xml
                         String pathToUser = PathHandler.PathToUsers + File.separator + userEditText.getText().toString() + ".xml";
                         String pathToKey = PathHandler.PathToKeys + File.separator + userEditText.getText().toString() + ".xml";
                         String newPassword = newPasswordEditText.getText().toString();
                         String repeatPassword = repeatPasswordEditText.getText().toString();
+
+                        // TODO: REGEX
                         if (PathHandler.fileExists(pathToUser)) {
-                            Logger.show("User already exists! Choose another name", context);
+                            Logger.show(R.string.error_user_exists, context);
                         } else if (!newPassword.equals(repeatPassword)) {
-                            Logger.show("The passwords don't match", context);
-                        } else {
+                            Logger.show(R.string.error_password_dont_match, context);
+                        }/* else if (!newPassword.matches(Password.PasswordREGEX)) {
+                            Logger.show("Password isn't save enough!", context);
+                        }*/ else {
                             try {
                                 User user = new User(userEditText.getText().toString(), newPassword, pathToKey);
                                 user.save();
