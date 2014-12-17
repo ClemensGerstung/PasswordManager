@@ -24,6 +24,10 @@
     <string name="error">Error: </string>
     <string name="error_user_exists">User already exists! Choose another name</string>
     <string name="error_password_dont_match">The passwords don\'t match</string>
+    <string name="error_old_password_empty">Old password can\'t be empty</string>
+    <string name="error_new_and_old_must_be_different">New and old password must be different</string>
+    <string name="error_new_password_cant_be_empty">New password can\'t be empty</string>
+    <string name="error_repeated_password_cant_be_empty">The repeated password can\'t be empty</string>
 
     <string name="helper_add_title">Add password</string>
     <string name="helper_cancel">Cancel</string>

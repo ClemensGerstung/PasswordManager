@@ -15,17 +15,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
         }
+        debug {
+            debuggable true
+        }
     }
     productFlavors {
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/simple-xml-2.7.1.jar')
+    provided files('libs/simple-xml-2.7.1.jar')
     compile 'com.android.support:appcompat-v7:21.0.2'
 }

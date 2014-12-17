@@ -11,8 +11,8 @@ public class RandomPasswordGenerator {
 
     private static final String[] things =
             {
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                     "abcdefghijklmnopqrstuvwxyz",
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                     "0123456789",
                     "!*_+-/;:"
             };

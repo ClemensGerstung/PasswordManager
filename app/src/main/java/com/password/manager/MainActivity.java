@@ -1,14 +1,17 @@
 package com.password.manager;
 
+import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import com.password.manager.core.Logger;
 import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.core.User;
 
 // TODO: add-button move into actionbar
-// TODO: rotate/close save instance state handling
-// TODO: set animations on swaping fragments
+// TODO: rotate save instance state handling -> DO NOT LOGOUT!!!!
+// TODO: set animations on swapping fragments
 
 public class MainActivity extends ActionBarActivity {
 
@@ -17,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
+
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
@@ -24,9 +28,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
+        outState.clear();
     }
 
     @Override
@@ -38,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //TODO: logout();
+        logout();
 
     }
 

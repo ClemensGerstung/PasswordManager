@@ -3,6 +3,7 @@ package com.password.manager.gui.helper;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -25,15 +26,28 @@ public class ChangeMasterPasswordHelper {
         final User user = User.getInstance("");
         View view = View.inflate(context, R.layout.change_master_password_layout, null);
 
+        final EditText oldPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_old_password_edit_text);
+        final EditText newPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_new_password_edit_text);
+        final EditText repeatPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_repeat_password_edit_text);
+
         // TODO: on touch password is visible
 
         final TextView oldPasswordTextView = (TextView) view.findViewById(R.id.change_master_password_old_password_text_view);
         final TextView newPasswordTextView = (TextView) view.findViewById(R.id.change_master_password_new_password_text_view);
         final TextView repeatPasswordTextView = (TextView) view.findViewById(R.id.change_master_password_repeat_password_text_view);
 
-        final EditText oldPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_old_password_edit_text);
-        final EditText newPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_new_password_edit_text);
-        final EditText repeatPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_repeat_password_edit_text);
+        /*oldPasswordTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        Logger.show("down", context);
+                        break;
+                }
+
+                return true;
+            }
+        });*/
 
         final AlertDialog d = new AlertDialog.Builder(context)
                 .setTitle(R.string.helper_change_master_password)
@@ -54,18 +68,17 @@ public class ChangeMasterPasswordHelper {
                         String newPW = newPasswordEditText.getText().toString();
                         String repeatPW = repeatPasswordEditText.getText().toString();
 
-                        // TODO: extract strings to strings.xml
                         // TODO: REGEX
                         if (oldPW.isEmpty()) {
-                            Logger.show("Old password can't be empty", context);
+                            Logger.show(R.string.error_old_password_empty, context);
                         } else if (newPW.isEmpty()) {
-                            Logger.show("New password can't be empty", context);
+                            Logger.show(R.string.error_new_password_cant_be_empty, context);
                         } else if (repeatPW.isEmpty()) {
-                            Logger.show("The repeated password can't be empty", context);
+                            Logger.show(R.string.error_repeated_password_cant_be_empty, context);
                         } else if (!newPW.equals(repeatPW)) {
-                            Logger.show("The new passwords doesn't match!", context);
+                            Logger.show(R.string.error_password_dont_match, context);
                         } else if (newPW.equals(oldPW)) {
-                            Logger.show("New and old password must be different", context);
+                            Logger.show(R.string.error_new_and_old_must_be_different, context);
                         }/* else if (!newPW.matches(Password.PasswordREGEX)) {
                             Logger.show("Password isn't save enough!", context);
                         }*/ else {
