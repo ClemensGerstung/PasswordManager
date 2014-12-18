@@ -23,6 +23,8 @@ import com.password.manager.handler.PathHandler;
 
 import java.io.File;
 
+
+
 public class LoginFragment extends Fragment {
 
     private CheckBox remember_user;

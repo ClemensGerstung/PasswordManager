@@ -2,6 +2,7 @@ package com.password.manager;
 
 
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,7 +21,9 @@ import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
 import com.password.manager.gui.helper.AddEditPasswordHelper;
-
+// TODO: add-button move into actionbar
+// TODO: search
+// TODO: order
 
 public class PasswordListFragment extends Fragment {
 
@@ -95,6 +98,8 @@ public class PasswordListFragment extends Fragment {
                 }
             }
         });
+
+
 
         return view;
     }

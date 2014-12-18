@@ -10,8 +10,6 @@ import com.password.manager.core.Logger;
 import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.core.User;
 
-// TODO: add-button move into actionbar
-// TODO: rotate save instance state handling -> DO NOT LOGOUT!!!!
 // TODO: set animations on swapping fragments
 
 public class MainActivity extends ActionBarActivity {
