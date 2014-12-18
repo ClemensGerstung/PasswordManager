@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.accent_material_light));
 
         getFragmentManager()
                 .beginTransaction()
