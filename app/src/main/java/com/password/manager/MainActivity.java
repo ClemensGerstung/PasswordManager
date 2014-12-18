@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.Toast;
 
 import com.password.manager.core.Logger;
 import com.password.manager.handler.PasswordListHandler;
@@ -30,20 +31,31 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            onOrientationChanged();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            onOrientationChanged();
+        }
+    }
 
-
+    private void onOrientationChanged() {
+        if(User.isLoggedIn() && PasswordListHandler.isLoggedIn()) // Both should be true
+        {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment())
+                    .commit();
+        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         outState.clear();
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         logout();
     }
 
@@ -51,7 +63,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onPause() {
         super.onPause();
         logout();
-
     }
 
     public void logout() {
