@@ -1,10 +1,8 @@
 package com.password.manager;
 
 
-
-import android.app.ActionBar;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,15 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import com.password.manager.core.Logger;
 import com.password.manager.core.PasswordListAdapter;
-import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
-import com.password.manager.handler.PasswordListHandler;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
 import com.password.manager.gui.helper.AddEditPasswordHelper;
+import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
+import com.password.manager.handler.PasswordListHandler;
 // TODO: add-button move into actionbar
 // TODO: search
 // TODO: order
@@ -29,6 +29,9 @@ public class PasswordListFragment extends Fragment {
 
     private ListView passwordListView;
     private PasswordListAdapter passwordListAdapter;
+    private Button orderButton;
+    private Button addButton;
+    private Button searchButton;
 
     public PasswordListFragment() {
         setHasOptionsMenu(true);
@@ -45,7 +48,7 @@ public class PasswordListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.menu_logout:
                 User.logout();
                 PasswordListHandler.logout();
@@ -53,9 +56,6 @@ public class PasswordListFragment extends Fragment {
                         .beginTransaction()
                         .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
                         .commit();
-                break;
-            case R.id.menu_new_password_entry:
-                AddEditPasswordHelper.addPassword(getActivity());
                 break;
             case R.id.menu_change_password:
                 try {
@@ -68,7 +68,6 @@ public class PasswordListFragment extends Fragment {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
@@ -99,6 +98,25 @@ public class PasswordListFragment extends Fragment {
             }
         });
 
+        orderButton = (Button) view.findViewById(R.id.password_list_button_line_order_button);
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: extract to external class
+                PopupMenu popupMenu = new PopupMenu(getActivity(), v);
+                MenuInflater menuInflater = getActivity().getMenuInflater();
+                menuInflater.inflate(R.menu.password_list_button_line_order_menu, popupMenu.getMenu());
+                popupMenu.show();
+            }
+        });
+
+        addButton = (Button) view.findViewById(R.id.password_list_button_line_add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddEditPasswordHelper.addPassword(getActivity());
+            }
+        });
 
 
         return view;

@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void onOrientationChanged() {
-        if(User.isLoggedIn() && PasswordListHandler.isLoggedIn()) // Both should be true
+        if(User.isLoggedIn() && PasswordListHandler.isLoggedIn()) // Both should ALWAYS be true
         {
             getFragmentManager()
                     .beginTransaction()
