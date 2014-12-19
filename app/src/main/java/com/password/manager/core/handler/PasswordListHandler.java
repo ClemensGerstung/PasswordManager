@@ -1,4 +1,4 @@
-package com.password.manager.handler;
+package com.password.manager.core.handler;
 
 import com.password.manager.core.Password;
 import com.password.manager.core.User;

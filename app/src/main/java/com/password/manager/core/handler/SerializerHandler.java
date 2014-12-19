@@ -1,4 +1,4 @@
-package com.password.manager.handler;
+package com.password.manager.core.handler;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;

@@ -1,13 +1,10 @@
 package com.password.manager;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.Toast;
 
-import com.password.manager.core.Logger;
-import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.core.User;
 
 // TODO: set animations on swapping fragments

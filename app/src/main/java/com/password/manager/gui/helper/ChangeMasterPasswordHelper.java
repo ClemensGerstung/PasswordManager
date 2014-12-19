@@ -3,19 +3,15 @@ package com.password.manager.gui.helper;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.InputType;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.password.manager.R;
 import com.password.manager.core.Logger;
-import com.password.manager.core.Password;
 import com.password.manager.core.User;
-import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.core.handler.PasswordListHandler;
 
 /**
  * Created by Clemens on 12.12.2014.

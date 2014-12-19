@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 
 import com.password.manager.core.Logger;
 import com.password.manager.core.PasswordListAdapter;
@@ -20,7 +19,8 @@ import com.password.manager.core.Settings;
 import com.password.manager.core.User;
 import com.password.manager.gui.helper.AddEditPasswordHelper;
 import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
-import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.gui.helper.OrderPasswordListHelper;
+import com.password.manager.core.handler.PasswordListHandler;
 // TODO: add-button move into actionbar
 // TODO: search
 // TODO: order
@@ -102,11 +102,7 @@ public class PasswordListFragment extends Fragment {
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: extract to external class
-                PopupMenu popupMenu = new PopupMenu(getActivity(), v);
-                MenuInflater menuInflater = getActivity().getMenuInflater();
-                menuInflater.inflate(R.menu.password_list_button_line_order_menu, popupMenu.getMenu());
-                popupMenu.show();
+                OrderPasswordListHelper.orderPasswordList(getActivity(), v, passwordListAdapter);
             }
         });
 

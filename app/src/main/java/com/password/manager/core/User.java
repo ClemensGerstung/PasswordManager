@@ -1,8 +1,8 @@
 package com.password.manager.core;
 
-import com.password.manager.handler.AESHandler;
-import com.password.manager.handler.PathHandler;
-import com.password.manager.handler.SerializerHandler;
+import com.password.manager.core.handler.AESHandler;
+import com.password.manager.core.handler.PathHandler;
+import com.password.manager.core.handler.SerializerHandler;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;

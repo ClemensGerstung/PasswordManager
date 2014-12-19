@@ -12,7 +12,7 @@ import com.password.manager.core.PasswordListAdapter;
 import com.password.manager.R;
 import com.password.manager.core.Logger;
 import com.password.manager.core.Password;
-import com.password.manager.handler.PasswordListHandler;
+import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.core.RandomPasswordGenerator;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;

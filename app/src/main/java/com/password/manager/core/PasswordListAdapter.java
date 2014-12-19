@@ -16,12 +16,27 @@ import java.util.List;
 public class PasswordListAdapter extends ArrayAdapter<Password> {
     
     private List<Password> objects;
+    private final List<Password> backupList;
     private boolean saveLogin;
 
     public PasswordListAdapter(Context context,  List<Password> objects, boolean saveLogin) {
         super(context, 0, objects);
         this.objects = objects;
+        this.backupList = objects;
         this.saveLogin = saveLogin;
+    }
+
+    public void order(Query query){
+        objects = query.run(backupList);
+
+        notifyDataSetChanged();
+    }
+
+    public void order(String query){
+        Query q = new Query(query);
+        objects = q.run(backupList);
+
+        notifyDataSetChanged();
     }
 
     public void setObjects(List<Password> objects) {

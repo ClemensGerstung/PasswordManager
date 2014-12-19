@@ -9,9 +9,8 @@ import android.widget.EditText;
 
 import com.password.manager.R;
 import com.password.manager.core.Logger;
-import com.password.manager.core.Password;
 import com.password.manager.core.User;
-import com.password.manager.handler.PathHandler;
+import com.password.manager.core.handler.PathHandler;
 
 import java.io.File;
 

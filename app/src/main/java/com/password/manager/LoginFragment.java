@@ -17,9 +17,9 @@ import com.password.manager.core.Logger;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
 import com.password.manager.gui.helper.CreateUserHelper;
-import com.password.manager.handler.AESHandler;
-import com.password.manager.handler.PasswordListHandler;
-import com.password.manager.handler.PathHandler;
+import com.password.manager.core.handler.AESHandler;
+import com.password.manager.core.handler.PasswordListHandler;
+import com.password.manager.core.handler.PathHandler;
 
 import java.io.File;
 
