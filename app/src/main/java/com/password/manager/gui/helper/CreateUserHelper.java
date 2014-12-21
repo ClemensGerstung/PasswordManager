@@ -58,6 +58,10 @@ public class CreateUserHelper {
                         }*/ else {
                             try {
                                 User user = new User(userEditText.getText().toString(), newPassword, pathToKey);
+
+                                PathHandler.createPMDirectory();
+
+
                                 user.save();
                                 PathHandler.writeFile(pathToKey, "");
 

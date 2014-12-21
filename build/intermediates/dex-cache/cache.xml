@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\libs\simple-xml-2.7.1.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="083623424bcfa03bd598e709765bad0816c2375d">
-        <dex dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\simple-xml-2.7.1-23192835f73098aae101cba0b82bac42655f8b0a.jar" />
-    </item>
-    <item
-        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\libs\internal_impl-21.0.2.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
-        <dex dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-706691f497942e1800e6a8c55251b8e45ea13612.jar" />
-    </item>
-    <item
-        jar="D:\Libraries\Android\adt-bundle-windows-x86_64-20131030\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.2\support-annotations-21.0.2.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
-        <dex dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-d3d4aaedc063196c0026fef4d1cd1f681dd21d05.jar" />
-    </item>
-    <item
-        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\classes.jar"
+        jar="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\classes.jar"
         jumboMode="false"
         revision="21.1.1"
         sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
-        <dex dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\classes-a26903789adce7ef2a9f9560a5c477aee51507a6.jar" />
+        <dex dex="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\classes-35b3c6eb23b608bc2ba41a98c3c41f4f7c1c2171.jar" />
     </item>
     <item
-        jar="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.2\classes.jar"
+        jar="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.2\libs\internal_impl-21.0.2.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
+        <dex dex="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.2-708e95926612eb6e466e1f28c60b76896baf19f5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\libs\simple-xml-2.7.1.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="083623424bcfa03bd598e709765bad0816c2375d">
+        <dex dex="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\simple-xml-2.7.1-3e44f83dc90dfa51977c0ec7d1608d0f7fdd8d5c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.2\classes.jar"
         jumboMode="false"
         revision="21.1.1"
         sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
-        <dex dex="D:\Dokumente\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\classes-80d2a23e94a98786a248a2a8dd5c289bf069a7cc.jar" />
+        <dex dex="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\classes-059787566a5d2bc9b0a85ee9975d39fc94600d85.jar" />
+    </item>
+    <item
+        jar="C:\Users\Gerstung\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.2\support-annotations-21.0.2.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
+        <dex dex="C:\Users\Gerstung\AndroidStudioProjects\PasswordManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.2-0d7e7b45a8a6b30410e539a1562ac6cd78db958a.jar" />
     </item>
 
 </items>

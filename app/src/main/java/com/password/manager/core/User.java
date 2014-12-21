@@ -17,6 +17,7 @@ import java.io.File;
 /// but modified a lot...
 @Root(name = "user")
 public class User {
+    private static User user;
     @Element(name = "name")
     public String username;
     @Element(name = "password")
@@ -30,6 +31,26 @@ public class User {
         this.username = username;
         this.password = password;
         this.path = path;
+    }
+
+    public static User getInstance(String user_file) throws Exception {
+        if (user == null && user_file != null) {
+            user = SerializerHandler.deserialize(user_file, User.class);
+        }
+
+        return user;
+    }
+
+    public static boolean isLoggedIn() {
+        return user != null;
+    }
+
+    public static void logout() {
+        if (!isLoggedIn()) return;
+        user.password = null;
+        user.username = null;
+        user.path = null;
+        user = null;
     }
 
     public String getUsername() {
@@ -56,34 +77,10 @@ public class User {
         this.path = path;
     }
 
-    private static User user;
-
-    public static User getInstance(String user_file) throws Exception {
-        if(user == null && user_file != null)
-        {
-            user = SerializerHandler.deserialize(user_file, User.class);
-        }
-
-        return user;
-    }
-
     public void save() throws Exception {
         User user = new User(this.username, this.password, this.path);
         user.setPassword(AESHandler.encrypt(user.getPassword(), user.getPassword()).replace("\n", ""));
         String ser = SerializerHandler.serialize(user);
         PathHandler.writeFile(PathHandler.PathToUsers + File.separator + user.username + ".xml", ser);
-    }
-
-    public static boolean isLoggedIn(){
-        return user != null;
-    }
-
-    public static void logout()
-    {
-        if(!isLoggedIn()) return;
-        user.password = null;
-        user.username = null;
-        user.path = null;
-        user = null;
     }
 }

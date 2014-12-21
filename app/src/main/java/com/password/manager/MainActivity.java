@@ -4,10 +4,11 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.core.User;
+import com.password.manager.core.handler.PasswordListHandler;
 
 // TODO: set animations on swapping fragments
+// TODO: on back_pressed in login_fragment close app
 
 public class MainActivity extends ActionBarActivity {
 
@@ -28,13 +29,13 @@ public class MainActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             onOrientationChanged();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             onOrientationChanged();
         }
     }
 
     private void onOrientationChanged() {
-        if(User.isLoggedIn() && PasswordListHandler.isLoggedIn()) // Both should ALWAYS be true
+        if (User.isLoggedIn() && PasswordListHandler.isLoggedIn()) // Both should ALWAYS be true
         {
             getFragmentManager()
                     .beginTransaction()
@@ -56,8 +57,8 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onPause() {
-        super.onPause();
         logout();
+        super.onPause();
     }
 
     public void logout() {
@@ -65,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
         PasswordListHandler.logout();
         getFragmentManager()
                 .beginTransaction()
-                //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                        //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
                 .commit();
 

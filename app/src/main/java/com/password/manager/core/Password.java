@@ -17,16 +17,16 @@ public class Password {
     public static final String PasswordREGEX = "^((?=.*\\d)(?=.*[a-zA-Z])[a-zA-Z0-9!*_+-/;:]{6,20})$";
 
     @Element(name = "header")
-    private String header;
+    public String program;
     @Element(name = "username")
-    private String username;
+    public String username;
     @Element(name = "password")
-    private String password;
+    public String password;
 
-    public Password(@Element(name = "header") String header,
+    public Password(@Element(name = "header") String program,
                     @Element(name = "username") String username,
                     @Element(name = "password") String password) {
-        this.header = header;
+        this.program = program;
         this.username = username;
         this.password = password;
     }
@@ -40,12 +40,12 @@ public class Password {
         return writer.toString();
     }
 
-    public String getHeader() {
-        return header;
+    public String getProgram() {
+        return program;
     }
 
-    public void setHeader(String header) {
-        this.header = header;
+    public void setProgram(String header) {
+        this.program = header;
     }
 
     public String getUsername() {

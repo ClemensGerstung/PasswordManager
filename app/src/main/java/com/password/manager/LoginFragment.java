@@ -16,13 +16,12 @@ import android.widget.Toast;
 import com.password.manager.core.Logger;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
-import com.password.manager.gui.helper.CreateUserHelper;
 import com.password.manager.core.handler.AESHandler;
 import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.core.handler.PathHandler;
+import com.password.manager.gui.helper.CreateUserHelper;
 
 import java.io.File;
-
 
 
 public class LoginFragment extends Fragment {

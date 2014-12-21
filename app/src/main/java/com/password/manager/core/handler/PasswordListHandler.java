@@ -39,11 +39,14 @@ public class PasswordListHandler {
         return passwordListHandler;
     }
 
-    public static void logout()
-    {
-        if(!isLoggedIn()) return;
+    public static void logout() {
+        if (!isLoggedIn()) return;
         passwordListHandler.objects = null;
         passwordListHandler = null;
+    }
+
+    public static boolean isLoggedIn() {
+        return passwordListHandler != null;
     }
 
     public List<Password> getObjects() {
@@ -53,10 +56,6 @@ public class PasswordListHandler {
     public void addAndSave(Password password) throws Exception {
         objects.add(password);
         save();
-    }
-
-    public static boolean isLoggedIn(){
-        return passwordListHandler != null;
     }
 
     public void save() throws Exception {

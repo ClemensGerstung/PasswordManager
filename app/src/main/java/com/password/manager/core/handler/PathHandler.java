@@ -19,8 +19,7 @@ public class PathHandler {
     public static String PathToKeys = Path + File.separator + "KEYS";
     public static String PathToSettingsFile = Path + File.separator + "settings.xml";
 
-    public static boolean fileExists(String path)
-    {
+    public static boolean fileExists(String path) {
         return new File(path).exists();
     }
 

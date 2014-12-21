@@ -17,10 +17,10 @@ import com.password.manager.core.Logger;
 import com.password.manager.core.PasswordListAdapter;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
+import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.gui.helper.AddEditPasswordHelper;
 import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
 import com.password.manager.gui.helper.OrderPasswordListHelper;
-import com.password.manager.core.handler.PasswordListHandler;
 // TODO: add-button move into actionbar
 // TODO: search
 // TODO: order

@@ -8,14 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.password.manager.core.PasswordListAdapter;
 import com.password.manager.R;
 import com.password.manager.core.Logger;
 import com.password.manager.core.Password;
-import com.password.manager.core.handler.PasswordListHandler;
+import com.password.manager.core.PasswordListAdapter;
 import com.password.manager.core.RandomPasswordGenerator;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
+import com.password.manager.core.handler.PasswordListHandler;
 
 
 /**
@@ -57,7 +57,7 @@ public class AddEditPasswordHelper {
                         String password = password_edit_text.getText().toString();
 
                         if (program.length() == 0) {
-                            Logger.show( R.string.error_no_program, context);
+                            Logger.show(R.string.error_no_program, context);
                         } else if (password.length() == 0) {
                             Logger.show(R.string.error_no_password, context);
                         } else {
@@ -85,7 +85,7 @@ public class AddEditPasswordHelper {
         final TextView username_text_view = (TextView) view.findViewById(R.id.show_password_edit_text_username);
         final TextView password_text_view = (TextView) view.findViewById(R.id.show_password_edit_text_password);
 
-        program_text_view.setText(password.getHeader(), TextView.BufferType.NORMAL);
+        program_text_view.setText(password.getProgram(), TextView.BufferType.NORMAL);
         username_text_view.setText(password.getUsername(), TextView.BufferType.NORMAL);
         password_text_view.setText(password.getPassword(), TextView.BufferType.NORMAL);
 
@@ -145,12 +145,12 @@ public class AddEditPasswordHelper {
                             dialog.dismiss();
                         }
                     }).show();
-        } else if (!Settings.getInstance().isSaveLogin()){
+        } else if (!Settings.getInstance().isSaveLogin()) {
             builder.show();
         }
     }
 
-    public static void editPassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter){
+    public static void editPassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter) {
         final PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
         View view = View.inflate(context, R.layout.add_edit_password_layout, null);
 
@@ -170,7 +170,7 @@ public class AddEditPasswordHelper {
 
         Password password = passwordListHandler.getObjects().get(index);
 
-        program_edit_text.setText(password.getHeader());
+        program_edit_text.setText(password.getProgram());
         username_edit_text.setText(password.getUsername());
         password_edit_text.setText(password.getPassword());
 
@@ -213,7 +213,7 @@ public class AddEditPasswordHelper {
                 .show();
     }
 
-    public static void removePassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter){
+    public static void removePassword(final Context context, final int index, final PasswordListAdapter passwordListAdapter) {
         new AlertDialog.Builder(context)
                 .setTitle(Logger.getResourceString(R.string.helper_delete, context))
                 .setMessage(R.string.helper_delete_message)

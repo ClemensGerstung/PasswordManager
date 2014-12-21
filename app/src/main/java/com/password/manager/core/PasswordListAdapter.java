@@ -8,33 +8,33 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.password.manager.R;
-import com.password.manager.core.Password;
 
 import java.util.List;
 
 
 public class PasswordListAdapter extends ArrayAdapter<Password> {
-    
-    private List<Password> objects;
+
     private final List<Password> backupList;
+    private List<Password> objects;
     private boolean saveLogin;
 
-    public PasswordListAdapter(Context context,  List<Password> objects, boolean saveLogin) {
+    public PasswordListAdapter(Context context, List<Password> objects, boolean saveLogin) {
         super(context, 0, objects);
         this.objects = objects;
         this.backupList = objects;
         this.saveLogin = saveLogin;
     }
 
-    public void order(Query query){
-        objects = query.run(backupList);
+    public void order(Query query) throws Exception {
+        query.run(backupList);
 
         notifyDataSetChanged();
     }
 
-    public void order(String query){
+    public void order(String query) throws Exception {
         Query q = new Query(query);
-        objects = q.run(backupList);
+        // TODO: objects = q.run(...)
+        q.run(backupList);
 
         notifyDataSetChanged();
     }
@@ -50,16 +50,16 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
 
         LayoutInflater vi = LayoutInflater.from(getContext());
         v = saveLogin ? vi.inflate(R.layout.password_list_item_save_login, null) : vi.inflate(R.layout.password_list_item_layout, null);
-        
-        TextView header = (TextView)v.findViewById(R.id.header_text_view);
-        TextView username = (TextView)v.findViewById(R.id.user_name_text_view);
-        TextView password = !saveLogin ? (TextView)v.findViewById(R.id.password_text_view) : null;
+
+        TextView header = (TextView) v.findViewById(R.id.header_text_view);
+        TextView username = (TextView) v.findViewById(R.id.user_name_text_view);
+        TextView password = !saveLogin ? (TextView) v.findViewById(R.id.password_text_view) : null;
 
         Password curr = objects.get(position);
 
-        header.setText(curr.getHeader());
+        header.setText(curr.getProgram());
         username.setText(curr.getUsername());
-        if(!saveLogin) password.setText(curr.getPassword());
+        if (!saveLogin) password.setText(curr.getPassword());
 
 
         return v;

@@ -27,7 +27,7 @@ public class RandomPasswordGenerator {
         int len = rnd.nextInt(maxLen - minLen + 1) + minLen;
         StringBuilder stringBuilder = new StringBuilder();
 
-        int []cnos = {
+        int[] cnos = {
                 0,  // current count of alphas
                 0,  // current count of CAPS alphas
                 0,  // current count of digits
@@ -44,19 +44,18 @@ public class RandomPasswordGenerator {
         return stringBuilder.toString();
     }
 
-    private static int generateDigit(Random rnd, int[] cnos, int noOfAlpha, int noOfCAPSAlpha, int noOfDigits, int noOfSplChars)
-    {
+    private static int generateDigit(Random rnd, int[] cnos, int noOfAlpha, int noOfCAPSAlpha, int noOfDigits, int noOfSplChars) {
         int r = rnd.nextInt(4);
-        if(cnos[r] < noOfAlpha && r == 0){
+        if (cnos[r] < noOfAlpha && r == 0) {
             cnos[r]++;
             return r;
-        } else if(cnos[r] < noOfCAPSAlpha && r == 1){
+        } else if (cnos[r] < noOfCAPSAlpha && r == 1) {
             cnos[r]++;
             return r;
-        } else if(cnos[r] < noOfDigits && r == 2){
+        } else if (cnos[r] < noOfDigits && r == 2) {
             cnos[r]++;
             return r;
-        } else if(cnos[r] < noOfSplChars && r == 3){
+        } else if (cnos[r] < noOfSplChars && r == 3) {
             cnos[r]++;
             return r;
         } else {
