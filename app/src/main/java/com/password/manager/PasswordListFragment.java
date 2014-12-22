@@ -21,9 +21,7 @@ import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.gui.helper.AddEditPasswordHelper;
 import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
 import com.password.manager.gui.helper.OrderPasswordListHelper;
-// TODO: add-button move into actionbar
 // TODO: search
-// TODO: order
 
 public class PasswordListFragment extends Fragment {
 

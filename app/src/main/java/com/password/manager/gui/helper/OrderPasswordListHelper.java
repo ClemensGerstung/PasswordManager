@@ -24,14 +24,29 @@ public class OrderPasswordListHelper {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                switch (id) {
-                    case R.id.name_ascending:
-                        try {
+                try {
+                    switch (id) {
+                        case R.id.name_ascending:
                             passwordListAdapter.order("ORDER_BY username ASCENDING");
-                        } catch (Exception e) {
-                            Logger.show(e.getMessage(), activity);
-                        }
-                        break;
+                            break;
+                        case R.id.name_descending:
+                            passwordListAdapter.order("ORDER_BY username DESCENDING");
+                            break;
+                        case R.id.password_ascending:
+                            passwordListAdapter.order("ORDER_BY password ASCENDING");
+                            break;
+                        case R.id.password_descending:
+                            passwordListAdapter.order("ORDER_BY password DESCENDING");
+                            break;
+                        case R.id.program_ascending:
+                            passwordListAdapter.order("ORDER_BY program ASCENDING");
+                            break;
+                        case R.id.program_descending:
+                            passwordListAdapter.order("ORDER_BY program DESCENDING");
+                            break;
+                    }
+                } catch (Exception e) {
+                    Logger.show(e.getMessage(), activity);
                 }
 
                 return true;

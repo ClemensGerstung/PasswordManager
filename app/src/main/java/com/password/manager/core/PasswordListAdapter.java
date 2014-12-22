@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.password.manager.R;
+import com.password.manager.core.query.Query;
 
 import java.util.List;
 
@@ -26,15 +27,15 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
     }
 
     public void order(Query query) throws Exception {
-        query.run(backupList);
+        objects = query.run(backupList);
 
         notifyDataSetChanged();
     }
 
     public void order(String query) throws Exception {
         Query q = new Query(query);
-        // TODO: objects = q.run(...)
-        q.run(backupList);
+        objects = q.run(backupList);
+        //q.run(backupList);
 
         notifyDataSetChanged();
     }
