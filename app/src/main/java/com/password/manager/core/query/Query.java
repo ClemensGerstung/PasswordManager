@@ -80,21 +80,18 @@ public class Query {
     }
 
     private <T> List<T> quick_sort(List<T> list, String field, SortOrder sortOrder) throws Exception {
-        List<Comparable> fieldValueList = toFieldList(list, field);
+        Object[] array = list.toArray();
 
-        Quick.sort(fieldValueList, list, sortOrder);
+        if(sortOrder.ordinal() == SortOrder.ASCENDING.ordinal()) QuickSortAscending.quicksort(array, field);
+        else QuickSortDescending.quicksort(array, field);
+
+        list.clear();
+
+        for (Object o : array){
+            list.add((T)o);
+        }
 
         return list;
     }
 
-    private <E> List<Comparable> toFieldList(List<E> list, String field) throws Exception {
-        List<Comparable> ret = new ArrayList<Comparable>();
-
-        for (E e : list) {
-            Field f = e.getClass().getDeclaredField(field);
-            ret.add((Comparable) f.get(e));
-        }
-
-        return ret;
-    }
 }
