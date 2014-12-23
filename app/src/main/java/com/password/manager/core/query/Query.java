@@ -43,7 +43,7 @@ public class Query {
 
     public <T> List<T> run(List<T> list) throws Exception {
         List<String> params = new LinkedList<String>();
-        params.addAll(Arrays.asList(query.split(" AND ")));
+        params.addAll(Arrays.asList(query.split(" " + QueryConnector.AND.toString() + " ")));
 
         for (String param : params) {
             String[] subParams = param.split(" ");

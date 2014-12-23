@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.password.manager.core.Logger;
@@ -20,16 +19,13 @@ import com.password.manager.core.User;
 import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.gui.helper.AddEditPasswordHelper;
 import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
-import com.password.manager.gui.helper.OrderPasswordListHelper;
 // TODO: search
 
 public class PasswordListFragment extends Fragment {
 
     private ListView passwordListView;
+    private BottomButtonFragment bottomButtonFragment;
     private PasswordListAdapter passwordListAdapter;
-    private Button orderButton;
-    private Button addButton;
-    private Button searchButton;
 
     public PasswordListFragment() {
         setHasOptionsMenu(true);
@@ -96,22 +92,10 @@ public class PasswordListFragment extends Fragment {
             }
         });
 
-        orderButton = (Button) view.findViewById(R.id.password_list_button_line_order_button);
-        orderButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OrderPasswordListHelper.orderPasswordList(getActivity(), v, passwordListAdapter);
-            }
-        });
-
-        addButton = (Button) view.findViewById(R.id.password_list_button_line_add_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddEditPasswordHelper.addPassword(getActivity());
-            }
-        });
-
+        bottomButtonFragment = (BottomButtonFragment) getActivity().getFragmentManager().findFragmentById(R.id.password_list_bottom_line_fragment);
+        if (bottomButtonFragment != null) {
+            bottomButtonFragment.setPasswordListAdapter(passwordListAdapter);
+        }
 
         return view;
     }

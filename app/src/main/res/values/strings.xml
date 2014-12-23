@@ -10,13 +10,11 @@
     <string name="login_layout_button_login">Login</string>
     <string name="login_layout_button_create_user">Create User</string>
     <string name="login_layout_checkbox_save_login">Save Login</string>
-
     <string name="menu_logout">Logout</string>
     <string name="menu_new_password">New Password</string>
     <string name="menu_change_password">Change Password</string>
-
-    <string name="error_user_doesnt_exist">User doesn\'t exist!</string>;
-    <string name="error_wrong_password">Wrong password!</string>
+    <string name="error_user_doesnt_exist">User doesn\'t exist!</string>
+;    <string name="error_wrong_password">Wrong password!</string>
     <string name="error_no_user_input">Enter a username</string>
     <string name="error_no_password">Enter a password</string>
     <string name="error_no_program">Enter a program</string>
@@ -28,7 +26,6 @@
     <string name="error_new_and_old_must_be_different">New and old password must be different</string>
     <string name="error_new_password_cant_be_empty">New password can\'t be empty</string>
     <string name="error_repeated_password_cant_be_empty">The repeated password can\'t be empty</string>
-
     <string name="helper_add_title">Add password</string>
     <string name="helper_cancel">Cancel</string>
     <string name="helper_edit">Edit</string>
@@ -36,15 +33,13 @@
     <string name="helper_delete_message">Are you sure?</string>
     <string name="helper_change_master_password">Change main password</string>
     <string name="helper_create_user">Create User</string>
-
     <string name="add_edit_password_text_view_program">Program: </string>
     <string name="add_edit_password_text_view_username">Username: </string>
     <string name="add_edit_password_text_view_password">Password: </string>
-
-
     <string name="show_password_header">Password</string>
     <string name="change_master_password_old_password">Old password:</string>
     <string name="change_master_password_new_password">New password:</string>
     <string name="change_master_password_repeat_password">Repeat password:</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
