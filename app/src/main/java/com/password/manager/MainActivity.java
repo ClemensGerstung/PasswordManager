@@ -64,11 +64,11 @@ public class MainActivity extends ActionBarActivity {
     public void logout() {
         User.logout();
         PasswordListHandler.logout();
+
         getFragmentManager()
                 .beginTransaction()
-                        //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+              //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
                 .commit();
-
     }
 }

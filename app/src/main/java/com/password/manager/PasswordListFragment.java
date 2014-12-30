@@ -63,11 +63,13 @@ public class PasswordListFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.password_list_layout, container, false);
+
+        View view = null;
+        view = inflater.inflate(R.layout.password_list_layout, container, false);
+
         passwordListView = (ListView) view.findViewById(R.id.password_list_list_view);
 
         try {
@@ -92,10 +94,17 @@ public class PasswordListFragment extends Fragment {
             }
         });
 
-        bottomButtonFragment = (BottomButtonFragment) getActivity().getFragmentManager().findFragmentById(R.id.password_list_bottom_line_fragment);
+        bottomButtonFragment = new BottomButtonFragment();
         if (bottomButtonFragment != null) {
             bottomButtonFragment.setPasswordListAdapter(passwordListAdapter);
         }
+
+
+        getActivity()
+                .getFragmentManager()
+                .beginTransaction()
+                .add(R.id.password_list_relative_layout, bottomButtonFragment)
+                .commit();
 
         return view;
     }

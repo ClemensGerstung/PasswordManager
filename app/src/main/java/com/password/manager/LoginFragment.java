@@ -127,7 +127,13 @@ public class LoginFragment extends Fragment {
 
                         settings.save();
 
-                        getActivity().getFragmentManager().beginTransaction().replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment()).commit();
+
+
+                        getActivity()
+                                .getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_layout_fragment_to_replace, new PasswordListFragment())
+                                .commit();
                     }
                 } catch (Exception e) {
                     Logger.show(e.getMessage(), getActivity());

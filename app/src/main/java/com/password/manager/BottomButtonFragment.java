@@ -2,6 +2,7 @@ package com.password.manager;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ public class BottomButtonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.bottom_button_fragment, container, false);
 
         orderButton = (Button) view.findViewById(R.id.password_list_button_line_order_button);
@@ -52,6 +54,18 @@ public class BottomButtonFragment extends Fragment {
             }
         });
 
+
+        searchButton = (Button) view.findViewById(R.id.password_list_button_line_search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.password_list_relative_layout, new BottomSearchFragment())
+                        .commit();
+            }
+        });
 
 
         return view;
