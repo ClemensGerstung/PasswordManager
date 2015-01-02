@@ -29,15 +29,14 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
     public void order(Query query) throws Exception {
         objects = query.run(backupList);
 
-        notifyDataSetChanged();
+        if (!objects.isEmpty()) notifyDataSetChanged();
     }
 
     public void order(String query) throws Exception {
         Query q = new Query(query);
         objects = q.run(backupList);
         //q.run(backupList);
-
-        notifyDataSetChanged();
+        if (!objects.isEmpty()) notifyDataSetChanged();
     }
 
     public void setObjects(List<Password> objects) {

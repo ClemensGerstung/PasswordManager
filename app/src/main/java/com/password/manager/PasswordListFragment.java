@@ -19,7 +19,6 @@ import com.password.manager.core.User;
 import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.gui.helper.AddEditPasswordHelper;
 import com.password.manager.gui.helper.ChangeMasterPasswordHelper;
-// TODO: search
 
 public class PasswordListFragment extends Fragment {
 

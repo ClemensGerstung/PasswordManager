@@ -1,7 +1,5 @@
 package com.password.manager.core.query;
 
-import android.util.Log;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,19 +52,23 @@ public class Query {
             }
         }
 
-
         return null;
     }
 
-    private <T> List<T> contains(List<T> list, String[] subParams) throws Exception{
+    private <T> List<T> contains(List<T> list, String[] subParams) throws Exception {
         List<T> ret = new ArrayList<T>();
-        for(T t : list){
+        for (T t : list) {
             Field[] fields = t.getClass().getDeclaredFields();
-            for(Field f : fields){
-                Log.d("CGIG", f.getClass().getCanonicalName());
+            boolean add = false;
+            for (Field f : fields) {
+                Object o = f.get(t);
+                add |= o.toString().contains(subParams[1]);
+            }
+            if(add){
+                ret.add(t);
             }
         }
-        return null;
+        return ret;
     }
 
     private <T> List<T> order_by(List<T> list, String[] subParams) throws Exception {
@@ -82,13 +84,14 @@ public class Query {
     private <T> List<T> quick_sort(List<T> list, String field, SortOrder sortOrder) throws Exception {
         Object[] array = list.toArray();
 
-        if(sortOrder.ordinal() == SortOrder.ASCENDING.ordinal()) QuickSortAscending.quicksort(array, field);
+        if (sortOrder.ordinal() == SortOrder.ASCENDING.ordinal())
+            QuickSortAscending.quicksort(array, field);
         else QuickSortDescending.quicksort(array, field);
 
         list.clear();
 
-        for (Object o : array){
-            list.add((T)o);
+        for (Object o : array) {
+            list.add((T) o);
         }
 
         return list;

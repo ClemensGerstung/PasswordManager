@@ -60,9 +60,12 @@ public class BottomButtonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getActivity().getFragmentManager();
+                BottomSearchFragment bsf = new BottomSearchFragment();
+                bsf.setPasswordListAdapter(passwordListAdapter);
+
                 fragmentManager
                         .beginTransaction()
-                        .replace(R.id.password_list_relative_layout, new BottomSearchFragment())
+                        .replace(R.id.password_list_relative_layout, bsf)
                         .commit();
             }
         });
