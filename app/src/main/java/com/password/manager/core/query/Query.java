@@ -41,18 +41,19 @@ public class Query {
 
     public <T> List<T> run(List<T> list) throws Exception {
         List<String> params = new LinkedList<String>();
+        List<T> tempList = new LinkedList<>(list);
         params.addAll(Arrays.asList(query.split(" " + QueryConnector.AND.toString() + " ")));
 
         for (String param : params) {
             String[] subParams = param.split(" ");
             if (subParams[0].equals(QueryCommand.CONTAINS.toString())) {
-                return contains(list, subParams);
+                tempList = contains(tempList, subParams);
             } else if (subParams[0].equals(QueryCommand.ORDER_BY.toString())) {
-                return order_by(list, subParams);
+                tempList = order_by(tempList, subParams);
             }
         }
 
-        return null;
+        return tempList;
     }
 
     private <T> List<T> contains(List<T> list, String[] subParams) throws Exception {
@@ -62,9 +63,9 @@ public class Query {
             boolean add = false;
             for (Field f : fields) {
                 Object o = f.get(t);
-                add |= o.toString().contains(subParams[1]);
+                add |= o.toString().contains(subParams[1]) & !f.toGenericString().contains("static");
             }
-            if(add){
+            if (add) {
                 ret.add(t);
             }
         }
@@ -72,6 +73,7 @@ public class Query {
     }
 
     private <T> List<T> order_by(List<T> list, String[] subParams) throws Exception {
+        if(subParams.length == 1) return list;
         if (subParams[2].equals(SortOrder.ASCENDING.toString())) {
             return quick_sort(list, subParams[1], SortOrder.ASCENDING);
         } else if (subParams[2].equals(SortOrder.DESCENDING.toString())) {

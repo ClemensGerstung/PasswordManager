@@ -4,11 +4,11 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import com.password.manager.core.Logger;
 import com.password.manager.core.User;
 import com.password.manager.core.handler.PasswordListHandler;
 
-// TODO: set animations on swapping fragments
-// TODO: on back_pressed in login_fragment close app
+// TODO: set animations on swapping fragments !!!after all!!!
 
 public class MainActivity extends ActionBarActivity {
 
@@ -52,7 +52,11 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        logout();
+        if (User.isLoggedIn() && PasswordListHandler.isLoggedIn()) /* Both should ALWAYS be true */ {
+            logout();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -67,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
 
         getFragmentManager()
                 .beginTransaction()
-              //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                        //.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                 .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
                 .commit();
     }

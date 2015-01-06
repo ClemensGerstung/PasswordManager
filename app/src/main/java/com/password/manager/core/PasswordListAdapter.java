@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.password.manager.R;
 import com.password.manager.core.query.Query;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -21,22 +22,24 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
 
     public PasswordListAdapter(Context context, List<Password> objects, boolean saveLogin) {
         super(context, 0, objects);
-        this.objects = objects;
-        this.backupList = objects;
+        this.objects = new LinkedList<>(objects);
+        this.backupList = new LinkedList<>(objects);
         this.saveLogin = saveLogin;
     }
 
     public void order(Query query) throws Exception {
-        objects = query.run(backupList);
+        objects.clear();
+        objects.addAll(query.run(backupList));
 
-        if (!objects.isEmpty()) notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     public void order(String query) throws Exception {
         Query q = new Query(query);
-        objects = q.run(backupList);
-        //q.run(backupList);
-        if (!objects.isEmpty()) notifyDataSetChanged();
+        objects.clear();
+        objects.addAll(q.run(backupList));
+
+        notifyDataSetChanged();
     }
 
     public void setObjects(List<Password> objects) {
@@ -55,12 +58,16 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
         TextView username = (TextView) v.findViewById(R.id.user_name_text_view);
         TextView password = !saveLogin ? (TextView) v.findViewById(R.id.password_text_view) : null;
 
-        Password curr = objects.get(position);
+        if(position < objects.size()) {
+            Password curr = objects.get(position);
 
-        header.setText(curr.getProgram());
-        username.setText(curr.getUsername());
-        if (!saveLogin) password.setText(curr.getPassword());
-
+            header.setText(curr.getProgram());
+            username.setText(curr.getUsername());
+            if (!saveLogin) password.setText(curr.getPassword());
+        }
+        else {
+            // TODO: fix graphics bug...
+        }
 
         return v;
     }

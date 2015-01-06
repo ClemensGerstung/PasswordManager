@@ -7,8 +7,6 @@ import java.util.Random;
  */
 public class RandomPasswordGenerator {
 
-    // TODO: improve it!
-
     private static final String[] things =
             {
                     "abcdefghijklmnopqrstuvwxyz",
