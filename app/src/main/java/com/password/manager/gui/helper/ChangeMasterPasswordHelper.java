@@ -1,9 +1,13 @@
 package com.password.manager.gui.helper;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,24 +30,61 @@ public class ChangeMasterPasswordHelper {
         final EditText newPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_new_password_edit_text);
         final EditText repeatPasswordEditText = (EditText) view.findViewById(R.id.change_master_password_repeat_password_edit_text);
 
-        // TODO: on touch password is visible
-
         final TextView oldPasswordTextView = (TextView) view.findViewById(R.id.change_master_password_old_password_text_view);
         final TextView newPasswordTextView = (TextView) view.findViewById(R.id.change_master_password_new_password_text_view);
         final TextView repeatPasswordTextView = (TextView) view.findViewById(R.id.change_master_password_repeat_password_text_view);
 
-        /*oldPasswordTextView.setOnTouchListener(new View.OnTouchListener() {
+        final int[] di = new int[1];
+        oldPasswordTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction()){
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                        Logger.show("down", context);
+                    case MotionEvent.ACTION_DOWN:
+                        di[0] = oldPasswordEditText.getInputType();
+                        oldPasswordEditText.setInputType(EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        oldPasswordEditText.setInputType(di[0]);
                         break;
                 }
 
                 return true;
             }
-        });*/
+        });
+
+        repeatPasswordTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        di[0] = repeatPasswordEditText.getInputType();
+                        repeatPasswordEditText.setInputType(EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        repeatPasswordEditText.setInputType(di[0]);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        newPasswordTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        di[0] = newPasswordEditText.getInputType();
+                        newPasswordEditText.setInputType(EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        newPasswordEditText.setInputType(di[0]);
+                        break;
+                }
+
+                return true;
+            }
+        });
 
         final AlertDialog d = new AlertDialog.Builder(context)
                 .setTitle(R.string.helper_change_master_password)
@@ -94,6 +135,8 @@ public class ChangeMasterPasswordHelper {
 
             }
         });
+
+        d.show();
 
     }
 }

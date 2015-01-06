@@ -3,9 +3,12 @@ package com.password.manager.gui.helper;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.password.manager.R;
 import com.password.manager.core.Logger;
@@ -25,8 +28,43 @@ public class CreateUserHelper {
         final EditText newPasswordEditText = (EditText) view.findViewById(R.id.create_user_new_password_edit_text);
         final EditText repeatPasswordEditText = (EditText) view.findViewById(R.id.create_user_repeat_password_edit_text);
 
-        // TODO: on click on text_view make password visible
+        final TextView newPasswordTextView = (TextView) view.findViewById(R.id.create_user_new_password_text_view);
+        final TextView repeatPasswordTextView = (TextView) view.findViewById(R.id.create_user_repeat_password_text_view);
 
+        final int[] di = new int[1];
+        newPasswordTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        di[0] = newPasswordEditText.getInputType();
+                        newPasswordEditText.setInputType(EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        newPasswordEditText.setInputType(di[0]);
+                        break;
+                }
+
+                return true;
+            }
+        });
+
+        repeatPasswordTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        di[0] = repeatPasswordEditText.getInputType();
+                        repeatPasswordEditText.setInputType(EditorInfo.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        repeatPasswordEditText.setInputType(di[0]);
+                        break;
+                }
+
+                return true;
+            }
+        });
 
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setTitle(R.string.helper_create_user)

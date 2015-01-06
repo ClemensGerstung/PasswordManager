@@ -58,15 +58,14 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
         TextView username = (TextView) v.findViewById(R.id.user_name_text_view);
         TextView password = !saveLogin ? (TextView) v.findViewById(R.id.password_text_view) : null;
 
-        if(position < objects.size()) {
+        if (position < objects.size()) {
             Password curr = objects.get(position);
 
             header.setText(curr.getProgram());
             username.setText(curr.getUsername());
             if (!saveLogin) password.setText(curr.getPassword());
-        }
-        else {
-            // TODO: fix graphics bug...
+        } else {
+            // TODO: fix graphics bug... remove last unused entries
         }
 
         return v;
