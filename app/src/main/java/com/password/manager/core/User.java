@@ -25,12 +25,15 @@ public class User {
     @Element(name = "path")
     public String path;
 
+    private int lockTime;
+
     public User(@Element(name = "name") String username,
                 @Element(name = "password") String password,
                 @Element(name = "path") String path) {
         this.username = username;
         this.password = password;
         this.path = path;
+        lockTime = 0;
     }
 
     public static User getInstance(String user_file) throws Exception {
@@ -75,6 +78,18 @@ public class User {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public int getLockTime() {
+        return lockTime;
+    }
+
+    public void setLockTime(int lockTime) {
+        this.lockTime = lockTime;
+    }
+
+    public boolean isLocked() {
+        return lockTime > 0;
     }
 
     public void save() throws Exception {

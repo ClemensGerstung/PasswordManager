@@ -127,8 +127,6 @@ public class LoginFragment extends Fragment {
 
                         settings.save();
 
-
-
                         getActivity()
                                 .getFragmentManager()
                                 .beginTransaction()
