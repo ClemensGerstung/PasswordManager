@@ -2,6 +2,7 @@ package com.password.manager;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.password.manager.core.Logger;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
+import com.password.manager.core.brut.force.prevention.LockService;
 import com.password.manager.core.handler.PasswordListHandler;
 import com.password.manager.gui.helper.CreateUserHelper;
 
@@ -85,7 +87,7 @@ public class LoginFragment extends Fragment {
 
                 try {
 
-
+                    LockService.LOCKSERVICE.loginUser(nameCharSequence.toString(), passwordCharSequence.toString());
 
                     Settings settings = Settings.getInstance();
                     settings.setSaveLogin(saveLogin.isChecked());

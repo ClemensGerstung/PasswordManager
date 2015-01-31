@@ -30,6 +30,8 @@ public class LockService extends Service {
 
     private HashMap<User, Integer> blockedUsers;
 
+    public static LockService LOCKSERVICE;
+
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
@@ -41,6 +43,18 @@ public class LockService extends Service {
                 synchronized (this) {
                     Bundle b = msg.getData();
 
+                    for (User user : blockedUsers.keySet()) {
+                        if (b.getInt(user.getUsername()) != 0) {
+                            int i = b.getInt(user.getUsername());
+                            long lockTime = LockTime.getTime(i) * 60 * 1000;
+                            try {
+                                user.wait(lockTime - System.currentTimeMillis());
+                            } catch (InterruptedException e) {
+                                Logger.show(e.getMessage(), getApplicationContext());
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -48,6 +62,8 @@ public class LockService extends Service {
 
     @Override
     public void onCreate() {
+        LOCKSERVICE = this;
+
         HandlerThread thread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
 
@@ -75,68 +91,62 @@ public class LockService extends Service {
         Logger.show("service done", this);
     }
 
-    public boolean loginUser(String username, String password) {
-        try {
-            if (username.length() == 0 && password.length() == 0)
-                throw new Exception(Logger.getResourceString(R.string.error_no_user_input_and_password, getApplicationContext()));
-            if (username.length() == 0)
-                throw new Exception(Logger.getResourceString(R.string.error_no_user_input, getApplicationContext()));
-            if (password.length() == 0)
-                throw new Exception(Logger.getResourceString(R.string.error_no_password, getApplicationContext()));
+    public boolean loginUser(String username, String password) throws Exception {
 
-            String path = PathHandler.PathToUsers + File.separator + username + ".xml";
-            if (!new File(path).exists()) {
-                throw new Exception(Logger.getResourceString(R.string.error_user_doesnt_exist, getApplicationContext()));
-            }
+        if (username.length() == 0 && password.length() == 0)
+            throw new Exception(Logger.getResourceString(R.string.error_no_user_input_and_password, getApplicationContext()));
+        if (username.length() == 0)
+            throw new Exception(Logger.getResourceString(R.string.error_no_user_input, getApplicationContext()));
+        if (password.length() == 0)
+            throw new Exception(Logger.getResourceString(R.string.error_no_password, getApplicationContext()));
 
-            String user_file = PathHandler.readFile(path);
-            User user = User.getInstance(user_file);
-            String en_pas = AESHandler.encrypt(password, password).replace("\n", "");
+        String path = PathHandler.PathToUsers + File.separator + username + ".xml";
+        if (!new File(path).exists()) {
+            throw new Exception(Logger.getResourceString(R.string.error_user_doesnt_exist, getApplicationContext()));
+        }
 
-            if (LockTry.isBlock(blockedUsers.get(user))) {
-                Bundle b = new Bundle();
-                b.putInt(user.getUsername(), blockedUsers.get(user));
-                Message m = new Message();
-                m.setData(b);
-                mServiceHandler.sendMessage(m);
+        String user_file = PathHandler.readFile(path);
+        User user = User.getInstance(user_file);
+        String en_pas = AESHandler.encrypt(password, password).replace("\n", "");
 
-                throw new Exception("User blocked");
-            } else if (!user.getPassword().equals(en_pas)) {
+        if (LockTry.isBlock(blockedUsers.get(user))) {
+            Bundle b = new Bundle();
+            b.putInt(user.getUsername(), blockedUsers.get(user));
+            Message m = new Message();
+            m.setData(b);
+            mServiceHandler.sendMessage(m);
+
+            throw new Exception("User blocked");
+        } else if (!user.getPassword().equals(en_pas)) {
                 /*
                 * lock user if wrong password
                 * */
 
-                if (blockedUsers.containsKey(user)) {
-                    int count = blockedUsers.get(user);
-                    blockedUsers.put(user, count++);
-                } else {
-                    blockedUsers.put(user, 1);
-                }
-
-
-                throw new Exception(Logger.getResourceString(R.string.error_wrong_password, getApplicationContext()));
-            } else if (en_pas.length() == 0) {
-                throw new Exception(Logger.getResourceString(R.string.error_no_password, getApplicationContext()));
+            if (blockedUsers.containsKey(user)) {
+                int count = blockedUsers.get(user);
+                blockedUsers.put(user, count++);
             } else {
-                user.setPassword(password.toString());
-
-                String key_file = PathHandler.readFile(PathHandler.PathToKeys + File.separator + username + ".xml");
-                if (key_file.isEmpty()) {
-                    PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
-                } else {
-                    String de_key_file = AESHandler.decrypt(key_file, user.getPassword());
-                    PasswordListHandler passwordListHandler = PasswordListHandler.createPasswordListHandlerFromString(de_key_file);
-                }
-
-                blockedUsers.remove(user);
-
-                return true;
+                blockedUsers.put(user, 1);
             }
-        } catch (Exception e) {
-            Logger.show(e.getMessage(), getApplicationContext());
-            User.logout();
-            PasswordListHandler.logout();
+
+
+            throw new Exception(Logger.getResourceString(R.string.error_wrong_password, getApplicationContext()));
+        } else if (en_pas.length() == 0) {
+            throw new Exception(Logger.getResourceString(R.string.error_no_password, getApplicationContext()));
+        } else {
+            user.setPassword(password.toString());
+
+            String key_file = PathHandler.readFile(PathHandler.PathToKeys + File.separator + username + ".xml");
+            if (key_file.isEmpty()) {
+                PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
+            } else {
+                String de_key_file = AESHandler.decrypt(key_file, user.getPassword());
+                PasswordListHandler passwordListHandler = PasswordListHandler.createPasswordListHandlerFromString(de_key_file);
+            }
+
+            blockedUsers.remove(user);
+
+            return true;
         }
-        return false;
     }
 }
