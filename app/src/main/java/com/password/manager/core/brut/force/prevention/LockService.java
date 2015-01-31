@@ -122,7 +122,7 @@ public class LockService extends Service {
                     mServiceHandler.sendMessage(m);
                 }
 
-                throw new Exception("User blocked");
+                throw new Exception(Logger.getResourceString(R.string.error_user_blocked, getApplicationContext()));
             }
         }
 

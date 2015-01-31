@@ -26,6 +26,10 @@
     <string name="error_new_and_old_must_be_different">New and old password must be different</string>
     <string name="error_new_password_cant_be_empty">New password can\'t be empty</string>
     <string name="error_repeated_password_cant_be_empty">The repeated password can\'t be empty</string>
+    <string name="error_user_blocked">User is blocked</string>
+    <string name="error_password_not_safe_enough">Password isn\'t save enough!</string>
+
+
     <string name="helper_add_title">Add password</string>
     <string name="helper_cancel">Cancel</string>
     <string name="helper_edit">Edit</string>

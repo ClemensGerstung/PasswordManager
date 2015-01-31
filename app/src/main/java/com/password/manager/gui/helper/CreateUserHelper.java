@@ -92,7 +92,7 @@ public class CreateUserHelper {
                         } else if (!newPassword.equals(repeatPassword)) {
                             Logger.show(R.string.error_password_dont_match, context);
                         } else if (PasswordSafetyHandler.isSafe(newPassword, 2, 2, 2, 2, 8)) {
-                            Logger.show("Password isn't save enough!", context);
+                            Logger.show(R.string.error_password_not_safe_enough, context);
                         } else {
                             try {
                                 User user = new User(userEditText.getText().toString(), newPassword, pathToKey);

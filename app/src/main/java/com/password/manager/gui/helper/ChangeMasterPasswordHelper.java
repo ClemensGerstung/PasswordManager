@@ -117,7 +117,7 @@ public class ChangeMasterPasswordHelper {
                         } else if (newPW.equals(oldPW)) {
                             Logger.show(R.string.error_new_and_old_must_be_different, context);
                         }else if (PasswordSafetyHandler.isSafe(newPW, 2, 2, 2, 2, 8)) {
-                            Logger.show("Password isn't save enough!", context);
+                            Logger.show(R.string.error_password_not_safe_enough, context);
                         }else {
                             try {
                                 user.setPassword(newPW);
