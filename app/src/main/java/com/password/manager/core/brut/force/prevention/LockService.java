@@ -1,13 +1,25 @@
 package com.password.manager.core.brut.force.prevention;
 
 
-import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.os.Process;
 
+import com.password.manager.R;
 import com.password.manager.core.Logger;
+import com.password.manager.core.User;
+import com.password.manager.core.handler.AESHandler;
+import com.password.manager.core.handler.PasswordListHandler;
+import com.password.manager.core.handler.PathHandler;
+
+import java.io.File;
+import java.util.HashMap;
 
 /**
  * Created by Clemens on 18.01.2015.
@@ -16,6 +28,8 @@ public class LockService extends Service {
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
 
+    private HashMap<User, Integer> blockedUsers;
+
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
             super(looper);
@@ -23,28 +37,23 @@ public class LockService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            long endTime = System.currentTimeMillis() + 5 * 1000;
-            while (System.currentTimeMillis() < endTime) {
+            while (true) {
                 synchronized (this) {
-                    try {
-                        wait(endTime - System.currentTimeMillis());
-                    } catch (Exception e) {
-                    }
+                    Bundle b = msg.getData();
+
                 }
             }
-
-            stopSelf(msg.arg1);
         }
     }
 
     @Override
     public void onCreate() {
-        HandlerThread thread = new HandlerThread("ServiceStartArguments",
-                Process.THREAD_PRIORITY_BACKGROUND);
+        HandlerThread thread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
 
         mServiceLooper = thread.getLooper();
         mServiceHandler = new ServiceHandler(mServiceLooper);
+        blockedUsers = new HashMap<>();
     }
 
     @Override
@@ -64,5 +73,70 @@ public class LockService extends Service {
     @Override
     public void onDestroy() {
         Logger.show("service done", this);
+    }
+
+    public boolean loginUser(String username, String password) {
+        try {
+            if (username.length() == 0 && password.length() == 0)
+                throw new Exception(Logger.getResourceString(R.string.error_no_user_input_and_password, getApplicationContext()));
+            if (username.length() == 0)
+                throw new Exception(Logger.getResourceString(R.string.error_no_user_input, getApplicationContext()));
+            if (password.length() == 0)
+                throw new Exception(Logger.getResourceString(R.string.error_no_password, getApplicationContext()));
+
+            String path = PathHandler.PathToUsers + File.separator + username + ".xml";
+            if (!new File(path).exists()) {
+                throw new Exception(Logger.getResourceString(R.string.error_user_doesnt_exist, getApplicationContext()));
+            }
+
+            String user_file = PathHandler.readFile(path);
+            User user = User.getInstance(user_file);
+            String en_pas = AESHandler.encrypt(password, password).replace("\n", "");
+
+            if (LockTry.isBlock(blockedUsers.get(user))) {
+                Bundle b = new Bundle();
+                b.putInt(user.getUsername(), blockedUsers.get(user));
+                Message m = new Message();
+                m.setData(b);
+                mServiceHandler.sendMessage(m);
+
+                throw new Exception("User blocked");
+            } else if (!user.getPassword().equals(en_pas)) {
+                /*
+                * lock user if wrong password
+                * */
+
+                if (blockedUsers.containsKey(user)) {
+                    int count = blockedUsers.get(user);
+                    blockedUsers.put(user, count++);
+                } else {
+                    blockedUsers.put(user, 1);
+                }
+
+
+                throw new Exception(Logger.getResourceString(R.string.error_wrong_password, getApplicationContext()));
+            } else if (en_pas.length() == 0) {
+                throw new Exception(Logger.getResourceString(R.string.error_no_password, getApplicationContext()));
+            } else {
+                user.setPassword(password.toString());
+
+                String key_file = PathHandler.readFile(PathHandler.PathToKeys + File.separator + username + ".xml");
+                if (key_file.isEmpty()) {
+                    PasswordListHandler passwordListHandler = PasswordListHandler.getInstance();
+                } else {
+                    String de_key_file = AESHandler.decrypt(key_file, user.getPassword());
+                    PasswordListHandler passwordListHandler = PasswordListHandler.createPasswordListHandlerFromString(de_key_file);
+                }
+
+                blockedUsers.remove(user);
+
+                return true;
+            }
+        } catch (Exception e) {
+            Logger.show(e.getMessage(), getApplicationContext());
+            User.logout();
+            PasswordListHandler.logout();
+        }
+        return false;
     }
 }

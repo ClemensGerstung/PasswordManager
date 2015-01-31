@@ -13,4 +13,8 @@ public class LockTry {
     public static final int FOURTH_STRIKE = 13;
 
     public static final int FIFTH_STRIKE = 15;
+
+    public static boolean isBlock(int iVal) {
+        return iVal == FIRST_STRIKE || iVal == SECOND_STRIKE || iVal == THIRD_STRIKE || iVal == FOURTH_STRIKE || iVal == FIFTH_STRIKE;
+    }
 }

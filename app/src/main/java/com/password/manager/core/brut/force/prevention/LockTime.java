@@ -4,6 +4,8 @@ package com.password.manager.core.brut.force.prevention;
  * Created by Clemens on 06.01.2015.
  */
 public class LockTime {
+    // Times in minutes
+
     public static final int SMALL = 1;
 
     public static final int MEDIUM = 5;
