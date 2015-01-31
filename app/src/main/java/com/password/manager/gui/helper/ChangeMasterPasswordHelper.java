@@ -16,6 +16,7 @@ import com.password.manager.R;
 import com.password.manager.core.Logger;
 import com.password.manager.core.User;
 import com.password.manager.core.handler.PasswordListHandler;
+import com.password.manager.core.handler.PasswordSafetyHandler;
 
 /**
  * Created by Clemens on 12.12.2014.
@@ -105,7 +106,6 @@ public class ChangeMasterPasswordHelper {
                         String newPW = newPasswordEditText.getText().toString();
                         String repeatPW = repeatPasswordEditText.getText().toString();
 
-                        // TODO: REGEX
                         if (oldPW.isEmpty()) {
                             Logger.show(R.string.error_old_password_empty, context);
                         } else if (newPW.isEmpty()) {
@@ -116,9 +116,9 @@ public class ChangeMasterPasswordHelper {
                             Logger.show(R.string.error_password_dont_match, context);
                         } else if (newPW.equals(oldPW)) {
                             Logger.show(R.string.error_new_and_old_must_be_different, context);
-                        }/* else if (!newPW.matches(Password.PasswordREGEX)) {
+                        }else if (PasswordSafetyHandler.isSafe(newPW, 2, 2, 2, 2, 8)) {
                             Logger.show("Password isn't save enough!", context);
-                        }*/ else {
+                        }else {
                             try {
                                 user.setPassword(newPW);
                                 user.save();

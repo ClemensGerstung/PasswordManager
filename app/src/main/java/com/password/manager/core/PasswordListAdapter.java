@@ -13,7 +13,7 @@ import com.password.manager.core.query.Query;
 import java.util.LinkedList;
 import java.util.List;
 
-
+// TODO: refactor search engine...so no graphics bug will appear..even on adding new items!!!
 public class PasswordListAdapter extends ArrayAdapter<Password> {
 
     private final List<Password> backupList;
@@ -65,7 +65,7 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
             username.setText(curr.getUsername());
             if (!saveLogin) password.setText(curr.getPassword());
         } else {
-            // TODO: fix graphics bug... remove last unused entries
+
         }
 
         return v;

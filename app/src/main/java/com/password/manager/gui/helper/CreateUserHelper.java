@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.password.manager.R;
 import com.password.manager.core.Logger;
 import com.password.manager.core.User;
+import com.password.manager.core.handler.PasswordSafetyHandler;
 import com.password.manager.core.handler.PathHandler;
 
 import java.io.File;
@@ -86,14 +87,13 @@ public class CreateUserHelper {
                         String newPassword = newPasswordEditText.getText().toString();
                         String repeatPassword = repeatPasswordEditText.getText().toString();
 
-                        // TODO: REGEX
                         if (PathHandler.fileExists(pathToUser)) {
                             Logger.show(R.string.error_user_exists, context);
                         } else if (!newPassword.equals(repeatPassword)) {
                             Logger.show(R.string.error_password_dont_match, context);
-                        }/* else if (!newPassword.matches(Password.PasswordREGEX)) {
+                        } else if (PasswordSafetyHandler.isSafe(newPassword, 2, 2, 2, 2, 8)) {
                             Logger.show("Password isn't save enough!", context);
-                        }*/ else {
+                        } else {
                             try {
                                 User user = new User(userEditText.getText().toString(), newPassword, pathToKey);
 
