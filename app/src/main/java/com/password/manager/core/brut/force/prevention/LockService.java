@@ -39,7 +39,6 @@ public class LockService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-
             Bundle b = msg.getData();
             for (User user : blockedUsers.keySet()) {
                 if (b.getInt(user.getUsername()) != 0) {
@@ -54,6 +53,9 @@ public class LockService extends Service {
                             }
                         }
                     }
+
+                    int count = blockedUsers.get(user) + 1;
+                    blockedUsers.put(user, count);
                 }
             }
         }
