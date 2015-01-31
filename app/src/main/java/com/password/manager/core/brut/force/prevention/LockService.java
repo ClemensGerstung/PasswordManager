@@ -39,22 +39,21 @@ public class LockService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            while (true) {
-                synchronized (this) {
-                    Bundle b = msg.getData();
 
-                    for (User user : blockedUsers.keySet()) {
-                        if (b.getInt(user.getUsername()) != 0) {
-                            int i = b.getInt(user.getUsername());
-                            long lockTime = LockTime.getTime(i) * 60 * 1000;
+            Bundle b = msg.getData();
+            for (User user : blockedUsers.keySet()) {
+                if (b.getInt(user.getUsername()) != 0) {
+                    int i = b.getInt(user.getUsername());
+                    long lockTime = LockTime.getTime(i) * 60 * 1000;
+                    long endTime = System.currentTimeMillis() + lockTime;
+                    while(System.currentTimeMillis() < endTime){
+                        synchronized (this) {
                             try {
-                                user.wait(lockTime - System.currentTimeMillis());
-                            } catch (InterruptedException e) {
-                                Logger.show(e.getMessage(), getApplicationContext());
+                                user.wait(endTime - System.currentTimeMillis());
+                            } catch (Exception e) {
                             }
                         }
                     }
-
                 }
             }
         }
@@ -109,24 +108,28 @@ public class LockService extends Service {
         User user = User.getInstance(user_file);
         String en_pas = AESHandler.encrypt(password, password).replace("\n", "");
 
-        if (LockTry.isBlock(blockedUsers.get(user))) {
-            Bundle b = new Bundle();
-            b.putInt(user.getUsername(), blockedUsers.get(user));
-            Message m = new Message();
-            m.setData(b);
-            mServiceHandler.sendMessage(m);
+        Integer i = blockedUsers.get(user);
 
-            throw new Exception("User blocked");
-        } else if (!user.getPassword().equals(en_pas)) {
-                /*
-                * lock user if wrong password
-                * */
+        if (i != null) {
+            if (LockTry.isBlock(i.intValue())) {
+                Bundle b = new Bundle();
+                b.putInt(user.getUsername(), blockedUsers.get(user));
+                Message m = new Message();
+                m.setData(b);
+                if (!user.getPassword().equals(en_pas)) {
+                    mServiceHandler.sendMessage(m);
+                }
 
+                throw new Exception("User blocked");
+            }
+        }
+
+        if (!user.getPassword().equals(en_pas)) {
             if (blockedUsers.containsKey(user)) {
-                int count = blockedUsers.get(user);
-                blockedUsers.put(user, count++);
+                int count = blockedUsers.get(user) + 1;
+                blockedUsers.put(user, count);
             } else {
-                blockedUsers.put(user, 1);
+                blockedUsers.put(user.copy(), 1);
             }
 
 
