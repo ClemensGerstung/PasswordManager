@@ -1,11 +1,10 @@
 package com.password.manager;
 
-import android.app.IntentService;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.password.manager.core.Logger;
 import com.password.manager.core.User;
 import com.password.manager.core.brut.force.prevention.LockService;
 import com.password.manager.core.handler.PasswordListHandler;
@@ -25,7 +24,8 @@ public class MainActivity extends ActionBarActivity {
                 .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
                 .commit();
 
-
+        Intent intent = new Intent(this, LockService.class);
+        startService(intent);
     }
 
     @Override
