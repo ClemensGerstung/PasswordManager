@@ -1,5 +1,8 @@
 package com.password.manager;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -8,6 +11,8 @@ import android.support.v7.app.ActionBarActivity;
 import com.password.manager.core.User;
 import com.password.manager.core.brut.force.prevention.LockService;
 import com.password.manager.core.handler.PasswordListHandler;
+
+import java.util.List;
 
 // TODO: set animations on swapping fragments !!!after all!!!
 
@@ -79,4 +84,5 @@ public class MainActivity extends ActionBarActivity {
                 .replace(R.id.main_layout_fragment_to_replace, new LoginFragment())
                 .commit();
     }
+
 }

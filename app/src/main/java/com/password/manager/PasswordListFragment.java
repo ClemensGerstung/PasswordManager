@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.password.manager.core.Logger;
+import com.password.manager.core.Password;
 import com.password.manager.core.PasswordListAdapter;
 import com.password.manager.core.Settings;
 import com.password.manager.core.User;
@@ -84,7 +85,7 @@ public class PasswordListFragment extends Fragment {
                 try {
                     AddEditPasswordHelper.showPassword(
                             getActivity(),
-                            PasswordListHandler.getInstance().getObjects().get(position),
+                            (Password) passwordListAdapter.getItem(position),
                             position,
                             passwordListAdapter);
                 } catch (Exception e) {
