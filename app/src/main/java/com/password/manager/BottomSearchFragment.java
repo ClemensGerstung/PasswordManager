@@ -55,20 +55,24 @@ public class BottomSearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    passwordListAdapter
-                            .order(Query.build(
-                                    QueryCommand.CONTAINS.toString(),
-                                    s.toString()
-                            ));
-                } catch (Exception e) {
-                    Logger.show(e.getMessage(), getActivity());
-                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                try {
+                    if (s.length() > 0) {
+                        passwordListAdapter
+                                .order(Query.build(
+                                        QueryCommand.CONTAINS.toString(),
+                                        s.toString()
+                                ));
+                    } else {
+                        passwordListAdapter.reset();
+                    }
+                } catch (Exception e) {
+//                    Logger.show(e.getMessage(), getActivity());
+                }
             }
         });
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.password.manager.R;
@@ -13,37 +14,68 @@ import com.password.manager.core.query.Query;
 import java.util.LinkedList;
 import java.util.List;
 
-// TODO: refactor search engine...so no graphics bug will appear..even on adding new items!!!
-public class PasswordListAdapter extends ArrayAdapter<Password> {
+public class PasswordListAdapter extends BaseAdapter {
 
     private final List<Password> backupList;
     private List<Password> objects;
     private boolean saveLogin;
+    private Context context;
+    private final Object lock = new Object();
 
     public PasswordListAdapter(Context context, List<Password> objects, boolean saveLogin) {
-        super(context, 0, objects);
+        this.context = context;
         this.objects = new LinkedList<>(objects);
         this.backupList = new LinkedList<>(objects);
         this.saveLogin = saveLogin;
+
     }
 
     public void order(Query query) throws Exception {
-        objects.clear();
-        objects.addAll(query.run(backupList));
+        synchronized (lock) {
+            objects.clear();
+            objects.addAll(query.run(backupList));
+        }
 
         notifyDataSetChanged();
     }
 
     public void order(String query) throws Exception {
         Query q = new Query(query);
-        objects.clear();
-        objects.addAll(q.run(backupList));
+        synchronized (lock) {
+            objects.clear();
+            objects.addAll(q.run(backupList));
+        }
+
+        notifyDataSetChanged();
+    }
+
+    public void reset() {
+        synchronized (lock) {
+            objects.clear();
+            objects.addAll(backupList);
+        }
 
         notifyDataSetChanged();
     }
 
     public void setObjects(List<Password> objects) {
         this.objects = objects;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getCount() {
+        return objects.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return objects.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
     }
 
     @Override
@@ -51,7 +83,7 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
 
         View v = view;
 
-        LayoutInflater vi = LayoutInflater.from(getContext());
+        LayoutInflater vi = LayoutInflater.from(context);
         v = saveLogin ? vi.inflate(R.layout.password_list_item_save_login, null) : vi.inflate(R.layout.password_list_item_layout, null);
 
         TextView header = (TextView) v.findViewById(R.id.header_text_view);
@@ -64,10 +96,11 @@ public class PasswordListAdapter extends ArrayAdapter<Password> {
             header.setText(curr.getProgram());
             username.setText(curr.getUsername());
             if (!saveLogin) password.setText(curr.getPassword());
-        } else {
-
         }
 
         return v;
     }
+
+
+
 }
