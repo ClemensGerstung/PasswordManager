@@ -69,6 +69,16 @@ public class PasswordListAdapter extends BaseAdapter {
         backupList.add(pw);
     }
 
+    public void set(Password pw, int index){
+        objects.set(index, pw);
+        backupList.set(index, pw);
+    }
+
+    public void remove(int index) {
+        objects.remove(index);
+        backupList.remove(index);
+    }
+
     @Override
     public int getCount() {
         return objects.size();

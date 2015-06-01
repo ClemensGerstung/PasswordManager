@@ -56,6 +56,8 @@ public class AddEditPasswordHelper {
                         } else {
                             try {
                                 passwordListHandler.addAndSave(new Password(program, username, password));
+                                passwordListAdapter.add(new Password(program, username, password));
+                                passwordListAdapter.notifyDataSetChanged();
                             } catch (Exception e) {
                                 Logger.show(e.getMessage(), context);
                             }
@@ -83,28 +85,27 @@ public class AddEditPasswordHelper {
 
         final AlertDialogHelper alertDialogHelper =
                 AlertDialogHelper.create(context, R.string.show_password_header, view, R.string.ok, R.string.helper_delete, R.string.helper_edit)
-                    .setAllButtons(
-                    new AlertDialogHelper.OnClickListener() {
-                        @Override
-                        public void onClick(AlertDialogHelper dialog) {
-                            dialog.dismiss();
-                        }
-                    },
-                    new AlertDialogHelper.OnClickListener() {
-                        @Override
-                        public void onClick(AlertDialogHelper dialog) {
-                            dialog.dismiss();
-
-                            removePassword(context, position, passwordListAdapter);
-                        }
-                    },
-                    new AlertDialogHelper.OnClickListener() {
-                        @Override
-                        public void onClick(AlertDialogHelper dialog) {
-                            dialog.dismiss();
-                            editPassword(context, position, passwordListAdapter);
-                        }
-                    });
+                        .setAllButtons(
+                                new AlertDialogHelper.OnClickListener() {
+                                    @Override
+                                    public void onClick(AlertDialogHelper dialog) {
+                                        dialog.dismiss();
+                                    }
+                                },
+                                new AlertDialogHelper.OnClickListener() {
+                                    @Override
+                                    public void onClick(AlertDialogHelper dialog) {
+                                        dialog.dismiss();
+                                        removePassword(context, position, passwordListAdapter);
+                                    }
+                                },
+                                new AlertDialogHelper.OnClickListener() {
+                                    @Override
+                                    public void onClick(AlertDialogHelper dialog) {
+                                        dialog.dismiss();
+                                        editPassword(context, position, passwordListAdapter);
+                                    }
+                                });
 
         if (Settings.getInstance().isSaveLogin()) {
             View view1 = View.inflate(context, R.layout.save_login_show_password_relogin, null);
@@ -177,6 +178,8 @@ public class AddEditPasswordHelper {
                                 plh.getObjects().set(index, ps);
                                 plh.save();
 
+                                passwordListAdapter.set(ps, index);
+
                                 passwordListAdapter.notifyDataSetChanged();
                             } catch (Exception e) {
                                 Logger.show(e.getMessage(), context);
@@ -198,6 +201,7 @@ public class AddEditPasswordHelper {
                         try {
                             PasswordListHandler.getInstance().getObjects().remove(index);
                             PasswordListHandler.getInstance().save();
+                            passwordListAdapter.remove(index);
                             passwordListAdapter.notifyDataSetChanged();
                         } catch (Exception e) {
                             Logger.show(e.getMessage(), context);
