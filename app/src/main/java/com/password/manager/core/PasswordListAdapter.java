@@ -14,7 +14,6 @@ import com.password.manager.core.query.Query;
 import java.util.LinkedList;
 import java.util.List;
 
-// TODO: synchronize to @com.password.manager.core.handler.PasswordListHandler
 public class PasswordListAdapter extends BaseAdapter {
 
     private final List<Password> backupList;

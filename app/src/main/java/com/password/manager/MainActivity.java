@@ -15,8 +15,6 @@ import com.password.manager.gui.helper.AlertDialogHelper;
 
 import java.util.List;
 
-// TODO: set animations on swapping fragments !!!after all!!!
-
 public class MainActivity extends ActionBarActivity {
 
     @Override
@@ -73,6 +71,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onPause() {
         logout();
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        if (User.isLoggedIn() && PasswordListHandler.isLoggedIn()) /* Both should ALWAYS be true */ {
+            logout();
+        }
+        super.onStop();
     }
 
     public void logout() {

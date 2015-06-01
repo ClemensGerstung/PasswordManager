@@ -1,22 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">PasswordManager</string>
+    <string name="activity_main_title">Password-Manager</string>
+    <string name="main_layout_menu_item_change_password_string">Passwort ändern</string>
+    <string name="login_layout_text_view_name_string">Name</string>
+    <string name="login_layout_text_view_password_string">Passwort</string>
+    <string name="login_layout_checkbox_string">Benutzer merken</string>
+    <string name="login_layout_button_login">Login</string>
+    <string name="login_layout_button_create_user">Benutzer erstellen</string>
+    <string name="login_layout_checkbox_save_login">Sicherer Login</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_new_password">Neues Passwort</string>
+    <string name="menu_change_password">Passowrt ändern</string>
+    <string name="error_user_doesnt_exist">Benutzer existiert nicht!</string>
+    <string name="error_wrong_password">Falsches Passwort!</string>
+    <string name="error_no_user_input">Benutzernamen eingeben</string>
+    <string name="error_no_password">Passwort eingeben</string>
+    <string name="error_no_program">Programm eingeben</string>
+    <string name="error_no_user_input_and_password">Benutzernamen und Passwort eingeben</string>
+    <string name="error">Fehler: </string>
+    <string name="error_user_exists">Benutzer existiert bereits! Wähle einen anderen Namen</string>
+    <string name="error_password_dont_match">Die Passwörter stimmen nicht überein</string>
+    <string name="error_old_password_empty">Das alte Passwort kann nicht leer sein</string>
+    <string name="error_new_and_old_must_be_different">Neues und altes Passwort müssen unterschiedlich sein</string>
+    <string name="error_new_password_cant_be_empty">Neues Passwort darf nicht leer sein</string>
+    <string name="error_repeated_password_cant_be_empty">Das wiederholte Passwort stimmt nicht</string>
+    <string name="error_user_blocked">Benutzer ist gesperrt</string>
+    <string name="error_password_not_safe_enough">Passwort ist nicht sicher genug</string>
 
-    <string name="add_new_password_fragment_header_text_view">Programm:</string>
-    <string name="add_new_password_fragment_username_text_view">Benutzer:</string>
-    <string name="add_new_password_fragment_password_text_view">Passwort:</string>
 
-    <string name="create_user_fragment_create_user_text_view">Erstelle Benutzer</string>
-    <string name="create_user_fragment_name_text_view">Name:</string>
-    <string name="create_user_fragment_password_text_view">Passwort:</string>
-    <string name="create_user_fragment_return_button">Zurück</string>
-    <string name="create_user_fragment_create_user_button">Erstelle Benutzer</string>
+    <string name="helper_add_title">Passwort hinzufügen</string>
+    <string name="helper_cancel">Abbrechen</string>
+    <string name="helper_edit">Bearbeiten</string>
+    <string name="helper_delete">Löschen</string>
+    <string name="helper_delete_message">Sicher?</string>
+    <string name="helper_change_master_password">Ändere Hauptpasswort</string>
+    <string name="helper_create_user">Benutzer erstellen</string>
+    <string name="add_edit_password_text_view_program">Programm: </string>
+    <string name="add_edit_password_text_view_username">Benutzername: </string>
+    <string name="add_edit_password_text_view_password">Passwort: </string>
+    <string name="show_password_header">Passwort</string>
+    <string name="change_master_password_old_password">Altes Passwort:</string>
+    <string name="change_master_password_new_password">Neues Passwort:</string>
+    <string name="change_master_password_repeat_password">Wiederholen:</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="order_username_asc">Benutzername aufsteigend</string>
+    <string name="order_username_des">Benutzername absteigend</string>
+    <string name="order_program_asc">Programm aufsteigend</string>
+    <string name="order_program_des">Programm absteigend</string>
+    <string name="order_password_asc">Passwort aufsteigend</string>
+    <string name="order_password_des">Passwort absteigend</string>
 
-    <string name="fragment_login_create_user_button">Erstelle neuen Benutzer</string>
-
-    <string name="password_list_fragment_insert_new_password_button">Neues Paswort hinzufügen</string>
-
-    <string name="password_edit_menu_show">Anzeigen</string>
-    <string name="password_edit_menu_edit">Editieren</string>
-    <string name="password_edit_menu_delete">Löschen</string>
+    <string name="ok">OK</string>
+    <string name="helper_enter_password">Passwort eingeben</string>
+    <string name="bottom_button_add">Hinzufügen</string>
+    <string name="bottom_button_search">Suchen</string>
+    <string name="bottom_button_order">Sortieren</string>
+    <string name="create_user_user_name">Benutzername:</string>
 </resources>
