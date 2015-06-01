@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import com.password.manager.core.User;
 import com.password.manager.core.brut.force.prevention.LockService;
 import com.password.manager.core.handler.PasswordListHandler;
+import com.password.manager.gui.helper.AlertDialogHelper;
 
 import java.util.List;
 
@@ -77,6 +78,8 @@ public class MainActivity extends ActionBarActivity {
     public void logout() {
         User.logout();
         PasswordListHandler.logout();
+
+        AlertDialogHelper.close();
 
         getFragmentManager()
                 .beginTransaction()

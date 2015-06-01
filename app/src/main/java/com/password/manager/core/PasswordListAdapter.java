@@ -14,6 +14,7 @@ import com.password.manager.core.query.Query;
 import java.util.LinkedList;
 import java.util.List;
 
+// TODO: synchronize to @com.password.manager.core.handler.PasswordListHandler
 public class PasswordListAdapter extends BaseAdapter {
 
     private final List<Password> backupList;
@@ -61,6 +62,11 @@ public class PasswordListAdapter extends BaseAdapter {
     public void setObjects(List<Password> objects) {
         this.objects = objects;
         notifyDataSetChanged();
+    }
+
+    public void add(Password pw){
+        objects.add(pw);
+        backupList.add(pw);
     }
 
     @Override

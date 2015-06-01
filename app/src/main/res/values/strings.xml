@@ -14,7 +14,7 @@
     <string name="menu_new_password">New Password</string>
     <string name="menu_change_password">Change Password</string>
     <string name="error_user_doesnt_exist">User doesn\'t exist!</string>
-;    <string name="error_wrong_password">Wrong password!</string>
+    <string name="error_wrong_password">Wrong password!</string>
     <string name="error_no_user_input">Enter a username</string>
     <string name="error_no_password">Enter a password</string>
     <string name="error_no_program">Enter a program</string>
@@ -52,4 +52,6 @@
     <string name="order_password_asc">Password ascending</string>
     <string name="order_password_des">Password descending</string>
 
+    <string name="ok">OK</string>
+    <string name="helper_enter_password">Enter your password</string>
 </resources>

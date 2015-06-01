@@ -50,7 +50,7 @@ public class BottomButtonFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddEditPasswordHelper.addPassword(getActivity());
+                AddEditPasswordHelper.addPassword(getActivity(), passwordListAdapter);
             }
         });
 
