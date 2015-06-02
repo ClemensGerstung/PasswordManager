@@ -73,14 +73,6 @@ public class MainActivity extends ActionBarActivity {
         super.onPause();
     }
 
-    @Override
-    protected void onStop() {
-        if (User.isLoggedIn() && PasswordListHandler.isLoggedIn()) /* Both should ALWAYS be true */ {
-            logout();
-        }
-        super.onStop();
-    }
-
     public void logout() {
         User.logout();
         PasswordListHandler.logout();

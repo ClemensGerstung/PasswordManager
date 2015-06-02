@@ -158,8 +158,10 @@ public class AlertDialogHelper {
     }
 
     public static void close() {
-        if(alertDialogHelper.dialog.isShowing()) {
-            alertDialogHelper.dialog.dismiss();
+        if(alertDialogHelper.dialog != null ) {
+            if(alertDialogHelper.dialog.isShowing()) {
+                alertDialogHelper.dialog.dismiss();
+            }
         }
     }
 
